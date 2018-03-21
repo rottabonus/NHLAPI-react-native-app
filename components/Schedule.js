@@ -29,13 +29,16 @@ export default class Schedule extends React.Component {
     }
     
     getScheduleDate = () => {
-        const url='http://statsapi.web.nhl.com/api/v1/schedule/dates?date=' + this.state.newdate;
+        const url='https://statsapi.web.nhl.com/api/v1/schedule?season=20172018';
         fetch(url)
         .then(response => response.json())
         .then(responseJson => {
-            this.setState({ schedule: responseJson.dates[0].games,
-                          renderdate: responseJson.dates[0].date});
-       })
+            let testDate = this.state.newdate;
+            for(i=0; i<responseJson.dates.length; i++){  
+            if(testDate == responseJson.dates[i].date) {
+            this.setState({ schedule: responseJson.dates[i].games,
+                          renderdate: responseJson.dates[i].date});
+       }}})
                 .catch((error) => {
                   Alert.alert(error);
                 });
@@ -55,7 +58,7 @@ export default class Schedule extends React.Component {
                 <Header placement="left"
                 leftComponent={{ icon: 'menu', color: '#fff',
                 onPress: () => this.props.navigation.navigate('DrawerOpen')}}
-                centerComponent={{ text: 'Schedule', style: { color: '#fff' } }}
+                centerComponent={{ text: 'Games', style: { color: '#fff' } }}
                 rightComponent={{ icon: 'home', color: '#fff',
                  onPress: () => this.props.navigation.navigate('Frontpage')}}/>
         

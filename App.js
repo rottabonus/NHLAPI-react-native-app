@@ -6,6 +6,7 @@ import Schedule from './components/Schedule';
 import StandingDetail from './components/StandingDetail';
 import ScheduleDetail from './components/ScheduleDetail';
 import HighlightVideo from './components/Video';
+import Player from './components/Player';
 
 
 export default class App extends React.Component {
@@ -18,7 +19,8 @@ export default class App extends React.Component {
         
 const  StackStanding = StackNavigator({
         Standings: {screen: Standings},
-        StandingDetail: {screen: StandingDetail}
+        StandingDetail: {screen: StandingDetail},
+        Player: {screen: Player}
         
         })       
 
@@ -30,9 +32,8 @@ const StackSchedule = StackNavigator({
     
 const DrawerNavigation = DrawerNavigator({
         
-        
+         Standings: {screen: StackStanding},    
         Schedule: {screen: StackSchedule},
-        Standings: {screen: StackStanding},
         Frontpage: {screen: Front}
         
         }) 

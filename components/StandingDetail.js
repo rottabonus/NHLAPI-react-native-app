@@ -33,17 +33,23 @@ export default class StandingDetail extends React.Component {
                 });
     }
     
+   
+    
      getPlayers = () => {
-        const url = 'http://statsapi.web.nhl.com/api/v1/teams/' + this.state.data.id + '/roster';
+        const url = 'http://statsapi.web.nhl.com/api/v1/teams/' + this.state.data.id + '?hydrate=roster(person(stats(splits=statsSingleSeason)))';
         fetch(url)
         .then(response => response.json())
         .then(responseJson => {
-            this.setState({ players: responseJson.roster,
+            this.setState({ players: responseJson.teams[0].roster.roster,
                           isLoading: false});
        })
                 .catch((error) => {
                   Alert.alert(error);
                 });
+    }
+     
+   getPlayerDetails = (item) => {
+        this.props.navigation.navigate('Player', {...item});
     }
     
   render() {
@@ -68,6 +74,7 @@ export default class StandingDetail extends React.Component {
         renderItem={({item}) => <ListItem 
         title={`${item.person.fullName} # ${item.jerseyNumber}`}
         subtitle={item.position.name}
+        onPress={() => this.getPlayerDetails(item)}
         />}/>
         </List>  
         

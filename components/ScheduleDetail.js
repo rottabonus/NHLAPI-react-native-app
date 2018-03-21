@@ -44,7 +44,7 @@ export default class ScheduleDetail extends React.Component {
    
    getHighlightVideo = (item) => {
         this.props.navigation.navigate('HighlightVideo', {...item});
-    }
+   }
     
  
   render() {
@@ -59,8 +59,7 @@ export default class ScheduleDetail extends React.Component {
     return (
       <View style={styles.container}>
         <Text style={styles.text}>
-       Yello, this is ScheduleDetail, here we will render details about match.
-        This games id is {this.state.game.gamePk}
+        Highlights of the game:
         </Text>
         
         <List>
