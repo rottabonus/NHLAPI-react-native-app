@@ -6,8 +6,7 @@ This application is under construction!
 
 **Implemented features**:
 
-1. Standings for all divisions
-1. Schedule for current day and show schedule by date
+
 1. Basic validation for game-search by date (app wont crash)
 1. HighlightVideos of searched games
 1. Team rosters
@@ -19,4 +18,4 @@ This application is under construction!
 1. Save favourite team
 1. Login
 1. More in-game statistics
-1. Standings for league (not divisions)
+1. Standings for league (not only divisions)
