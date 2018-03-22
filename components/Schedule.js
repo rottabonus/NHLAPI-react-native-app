@@ -63,7 +63,7 @@ export default class Schedule extends React.Component {
                  onPress: () => this.props.navigation.navigate('Frontpage')}}/>
         
         <View style={styles.container}>
-        <TextInput style={styles.input} placeholder='Date i.e. 2018-03-19' onChangeText={(newdate) => this.setState({newdate})} value={this.state.newdate} />
+        <TextInput style={styles.input} placeholder='Date YYYY-MM-DD' onChangeText={(newdate) => this.setState({newdate})} value={this.state.newdate} />
         <Button onPress={this.getScheduleDate} title="Search by Date"/>    
             
         <View>

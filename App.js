@@ -7,6 +7,7 @@ import StandingDetail from './components/StandingDetail';
 import ScheduleDetail from './components/ScheduleDetail';
 import HighlightVideo from './components/Video';
 import Player from './components/Player';
+import Search from './components/Search';
 
 
 export default class App extends React.Component {
@@ -32,6 +33,7 @@ const StackSchedule = StackNavigator({
     
 const DrawerNavigation = DrawerNavigator({
         
+        Search: {screen: Search},
          Standings: {screen: StackStanding},    
         Schedule: {screen: StackSchedule},
         Frontpage: {screen: Front}
