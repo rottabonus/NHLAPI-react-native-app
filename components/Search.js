@@ -1,20 +1,151 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, Alert, FlatList } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Alert, ActivityIndicator } from 'react-native';
 import { Header, Button } from 'react-native-elements';
 
 export default class Search extends React.Component {
     static navigationOptions = {title: 'Search'};
     constructor(props){
         super(props);
-        this.state = {data: []};
+        this.state = {data: [], player: '', isLoading: false, search: '', playerFound: false};
     }
     
+startSearch = () => {
+    this.setState({
+        isLoading: true
+    });
+    this.findPlayerOne();
+}
+    
+    
+findPlayerOne = () => {
+        for(i = 1; i < 11; i++){
+            const url='http://statsapi.web.nhl.com/api/v1/teams/'+i+'/roster';
+            fetch(url)
+            .then((response) => response.json())
+            .then((responseJson) => {
+                for(i = 0; i < responseJson.roster.length; i++){
+                    let player = responseJson.roster[i].person.fullName;
+                    if(player == this.state.search) {
+                        this.setState({
+                   player: responseJson.roster[i].person.fullName,
+                            playerFound: true,
+                            isLoading: false
+                });
+                }}})
+                .catch((error) => {
+                  Alert.alert(error);
+                });
+    }
+    if(!this.state.playerFound){
+        this.findPlayerTwo();
+    }
+    
+}
 
-    
-    
+findPlayerTwo = () => {
+        for(i = 12; i < 27; i++){
+            const url='http://statsapi.web.nhl.com/api/v1/teams/'+i+'/roster';
+            fetch(url)
+            .then((response) => response.json())
+            .then((responseJson) => {
+                for(i = 0; i < responseJson.roster.length; i++){
+                    let player = responseJson.roster[i].person.fullName;
+                    if(player == this.state.search) {
+                        this.setState({
+                   player: responseJson.roster[i].person.fullName,
+                            playerFound: true,
+                            isLoading: false
+                });
+                }}})
+                .catch((error) => {
+                  Alert.alert(error);
+                });
+    }
+    if(!this.state.playerFound){
+        this.findPlayerThree();
+    }
+}
+
+findPlayerThree = () => {
+        for(i = 28; i < 31; i++){
+            const url='http://statsapi.web.nhl.com/api/v1/teams/'+i+'/roster';
+            fetch(url)
+            .then((response) => response.json())
+            .then((responseJson) => {
+                for(i = 0; i < responseJson.roster.length; i++){
+                    let player = responseJson.roster[i].person.fullName;
+                    if(player == this.state.search) {
+                        this.setState({
+                   player: responseJson.roster[i].person.fullName,
+                            playerFound: true,
+                            isLoading: false
+                });
+                }}})
+                .catch((error) => {
+                  Alert.alert(error);
+                });
+    }
+    if(!this.state.playerFound){
+        this.findPlayerFour();
+    }
+}
+
+findPlayerFour = () => {
+        for(i = 52; i < 55; i++){
+            const url='http://statsapi.web.nhl.com/api/v1/teams/'+i+'/roster';
+            fetch(url)
+            .then((response) => response.json())
+            .then((responseJson) => {
+                for(i = 0; i < responseJson.roster.length; i++){
+                    let player = responseJson.roster[i].person.fullName;
+                    if(player == this.state.search) {
+                        this.setState({
+                   player: responseJson.roster[i].person.fullName,
+                            playerFound: true,
+                            isLoading: false
+                });
+                }else {
+                    this.setState({
+                        isLoading: false
+                    })
+                }
+                }})
+                .catch((error) => {
+                  Alert.alert(error);
+                });
+    }
+}
+
 
 
   render() {
+      if (this.state.isLoading) {
+      return (
+        <View style={{ flex: 1, paddingTop: 20 }}>
+          <ActivityIndicator />
+          <Text> Loading.... Ba dim ba dimb ba duu! </Text>
+        </View>
+      );
+    }
+      if(this.state.playerFound) {
+          return(
+              <View style={styles.header}>
+        
+                <Header placement="left"
+                leftComponent={{ icon: 'menu', color: '#fff',
+                onPress: () => this.props.navigation.navigate('DrawerOpen')}}
+                centerComponent={{ text: 'Search', style: { color: '#fff' } }}
+                rightComponent={{ icon: 'home', color: '#fff',
+                 onPress: () => this.props.navigation.navigate('Frontpage')}}/>
+                 
+                 <View style={styles.container}>
+        <Text>FoundPlayer</Text>
+        
+        <TextInput style={styles.input} placeholder='i.e. Patrik Laine' onChangeText={(search) => this.setState({search})} value={this.state.search} />
+        <Button onPress={this.startSearch} title="Get Player By Name"/>
+      </View></View>
+          );
+      }
     return (
         <View style={styles.header}>
         
@@ -28,6 +159,8 @@ export default class Search extends React.Component {
       <View style={styles.container}>
         <Text>Searchpage</Text>
         
+        <TextInput style={styles.input} placeholder='i.e. Patrik Laine' onChangeText={(search) => this.setState({search})} value={this.state.search} />
+        <Button onPress={this.startSearch} title="Get Player By Name"/>
       </View></View>
     );
   }
@@ -41,8 +174,17 @@ const styles = StyleSheet.create({
       margin: 20,
       paddingBottom: 50
   },
- header: {
+  header: {
         flex: 1
-    }   
+    },
+  input: {
+        width: 280,
+        borderColor: 'gray',
+        borderWidth: 1,
+        marginTop: 10,
+        marginBottom: 5,
+        alignSelf: 'center',
+        textAlign: 'center'
+},
     
 });
