@@ -60,7 +60,7 @@ export default class StandingDetail extends React.Component {
           <Text> Loading.... Ba dim ba dimb ba duu! </Text>
         </View>
       );
-    }
+      }
     return (
       <View style={styles.container}>
         <Text style={styles.text}>

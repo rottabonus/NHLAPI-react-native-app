@@ -2,18 +2,33 @@ import React from 'react';
 import { StyleSheet, Text, View, FlatList, TextInput, Alert, ActivityIndicator} from 'react-native';
 import { List, ListItem, Header, Button } from "react-native-elements";
 
+
+
 export default class Schedule extends React.Component {
     static navigationOptions = {header: null};
     constructor(props){
         super(props);
-        this.state = {schedule: [], renderdate: '', newdate: ''};
+        this.state = {schedule: [], renderdate: '', newdate: '', yesterday: ''};
     }
     
+    componentWillMount(){
+        this.getParsedDate();
+    }
     
     componentDidMount(){
         this.getSchedule();
+        
     }
-
+    
+getParsedDate = () => {
+    let date = new Date();
+    date.setDate(date.getDate() - 1);
+    let dateIso = date.toISOString();
+    let formattedDate = dateIso.substring(0, 10);
+    this.setState({
+        yesterday: formattedDate
+    });
+}
     
     getSchedule = () => {
         const url='http://statsapi.web.nhl.com/api/v1/schedule/';
@@ -39,6 +54,19 @@ export default class Schedule extends React.Component {
             this.setState({ schedule: responseJson.dates[i].games,
                           renderdate: responseJson.dates[i].date});
        }}})
+                .catch((error) => {
+                  Alert.alert(error);
+                });
+    }
+    
+    getYesterday = () => {
+        const url='https://statsapi.web.nhl.com/api/v1/schedule?startDate='+ this.state.yesterday+'&endDate='+this.state.renderdate;
+        fetch(url)
+        .then(response => response.json())
+        .then(responseJson => {
+            this.setState({ schedule: responseJson.dates[0].games,
+                          renderdate: this.state.yesterday});
+       })
                 .catch((error) => {
                   Alert.alert(error);
                 });
@@ -79,9 +107,8 @@ export default class Schedule extends React.Component {
         onPress={() => this.getMatch(item)}
         />}/>
         </List>
-        
+        <Button onPress={this.getYesterday} title="Yesterdays games"/>
         </View>
-        
         </View>
     );
   }

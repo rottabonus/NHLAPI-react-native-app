@@ -3,31 +3,38 @@ import { StyleSheet, Text, View, TextInput, Alert, ActivityIndicator } from 'rea
 import { Header, Button } from 'react-native-elements';
 
 export default class Search extends React.Component {
-    static navigationOptions = {title: 'Search'};
+    static navigationOptions = {header: null};
     constructor(props){
         super(props);
-        this.state = {data: [], player: '', isLoading: false, search: '', playerFound: false};
+        this.state = {player: [], isLoading: false, search: '', playerFound: false};
     }
     
 startSearch = () => {
     this.setState({
-        isLoading: true
+        playerFound: false
     });
     this.findPlayerOne();
+}
+
+endSearch = () => {
+    this.setState({
+        isLoading: false,
+        
+    });
 }
     
     
 findPlayerOne = () => {
         for(i = 1; i < 11; i++){
-            const url='http://statsapi.web.nhl.com/api/v1/teams/'+i+'/roster';
+            const url='http://statsapi.web.nhl.com/api/v1/teams/'+i+'?hydrate=roster(person(stats(splits=statsSingleSeason)))';
             fetch(url)
             .then((response) => response.json())
             .then((responseJson) => {
-                for(i = 0; i < responseJson.roster.length; i++){
-                    let player = responseJson.roster[i].person.fullName;
+                for(i = 0; i < responseJson.teams[0].roster.roster.length; i++){
+                    let player = responseJson.teams[0].roster.roster[i].person.fullName;
                     if(player == this.state.search) {
                         this.setState({
-                   player: responseJson.roster[i].person.fullName,
+                   player: responseJson.teams[0].roster.roster[i].person,
                             playerFound: true,
                             isLoading: false
                 });
@@ -44,15 +51,15 @@ findPlayerOne = () => {
 
 findPlayerTwo = () => {
         for(i = 12; i < 27; i++){
-            const url='http://statsapi.web.nhl.com/api/v1/teams/'+i+'/roster';
+            const url='http://statsapi.web.nhl.com/api/v1/teams/'+i+'?hydrate=roster(person(stats(splits=statsSingleSeason)))';
             fetch(url)
             .then((response) => response.json())
             .then((responseJson) => {
-                for(i = 0; i < responseJson.roster.length; i++){
-                    let player = responseJson.roster[i].person.fullName;
+                for(i = 0; i < responseJson.teams[0].roster.roster.length; i++){
+                    let player = responseJson.teams[0].roster.roster[i].person.fullName;
                     if(player == this.state.search) {
                         this.setState({
-                   player: responseJson.roster[i].person.fullName,
+                   player: responseJson.teams[0].roster.roster[i].person,
                             playerFound: true,
                             isLoading: false
                 });
@@ -68,15 +75,15 @@ findPlayerTwo = () => {
 
 findPlayerThree = () => {
         for(i = 28; i < 31; i++){
-            const url='http://statsapi.web.nhl.com/api/v1/teams/'+i+'/roster';
+            const url='http://statsapi.web.nhl.com/api/v1/teams/'+i+'?hydrate=roster(person(stats(splits=statsSingleSeason)))';
             fetch(url)
             .then((response) => response.json())
             .then((responseJson) => {
-                for(i = 0; i < responseJson.roster.length; i++){
-                    let player = responseJson.roster[i].person.fullName;
+                for(i = 0; i < responseJson.teams[0].roster.roster.length; i++){
+                    let player = responseJson.teams[0].roster.roster[i].person.fullName;
                     if(player == this.state.search) {
                         this.setState({
-                   player: responseJson.roster[i].person.fullName,
+                   player: responseJson.teams[0].roster.roster[i].person,
                             playerFound: true,
                             isLoading: false
                 });
@@ -90,26 +97,24 @@ findPlayerThree = () => {
     }
 }
 
+
 findPlayerFour = () => {
         for(i = 52; i < 55; i++){
-            const url='http://statsapi.web.nhl.com/api/v1/teams/'+i+'/roster';
+            const url='http://statsapi.web.nhl.com/api/v1/teams/'+i+'?hydrate=roster(person(stats(splits=statsSingleSeason)))';
             fetch(url)
             .then((response) => response.json())
             .then((responseJson) => {
-                for(i = 0; i < responseJson.roster.length; i++){
-                    let player = responseJson.roster[i].person.fullName;
+                for(i = 0; i < responseJson.teams[0].roster.roster.length; i++){
+                    let player = responseJson.teams[0].roster.roster[i].person.fullName;
                     if(player == this.state.search) {
                         this.setState({
-                   player: responseJson.roster[i].person.fullName,
+                   player: responseJson.teams[0].roster.roster[i].person,
                             playerFound: true,
                             isLoading: false
                 });
-                }else {
-                    this.setState({
-                        isLoading: false
-                    })
-                }
+                } this.endSearch(); 
                 }})
+                
                 .catch((error) => {
                   Alert.alert(error);
                 });
@@ -143,6 +148,7 @@ findPlayerFour = () => {
         
         <TextInput style={styles.input} placeholder='i.e. Patrik Laine' onChangeText={(search) => this.setState({search})} value={this.state.search} />
         <Button onPress={this.startSearch} title="Get Player By Name"/>
+        <Button style={{paddingTop: 20}} onPress={() => this.props.navigation.navigate('Player', {person: this.state.player})} title="Player Details"/>   
       </View></View>
           );
       }
