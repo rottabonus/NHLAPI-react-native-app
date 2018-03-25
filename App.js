@@ -9,6 +9,7 @@ import HighlightVideo from './components/Video';
 import Player from './components/Player';
 import Search from './components/Search';
 import GameDetail from './components/GameDetail';
+import GamePlayers from './components/GamePlayers';
 
 
 export default class App extends React.Component {
@@ -18,22 +19,26 @@ export default class App extends React.Component {
     );
   }
 }
-        
+
 const TabGame = TabNavigator({
     HighligthList: {screen: ScheduleDetail},
-    GameDetail: {screen: GameDetail}
+    GameDetail: {screen: GameDetail},
+    GamePlayers: {screen: GamePlayers}
 }, {
     tabBarPosition: 'bottom',
-    animationEnabled: true
-} 
-);        
-        
+    animationEnabled: true,
+    style: {
+      backgroundColor: 'gray'
+    }
+}
+);
+
 const  StackStanding = StackNavigator({
         Standings: {screen: Standings},
         StandingDetail: {screen: StandingDetail},
         Player: {screen: Player}
-        
-        })       
+
+        })
 
 const StackSchedule = StackNavigator({
         Schedule: {screen: Schedule},
@@ -48,15 +53,12 @@ const StackSearch = StackNavigator({
     Search: {screen: Search},
     Player: {screen: Player}
 })
-    
+
 const DrawerNavigation = DrawerNavigator({
-        
+
         Search: {screen: StackSearch},
-         Standings: {screen: StackStanding},    
+         Standings: {screen: StackStanding},
         Schedule: {screen: StackSchedule},
         Frontpage: {screen: Front}
-        
-        }) 
 
-
-
+        })

@@ -2,11 +2,11 @@ import React from 'react';
 import { StyleSheet, Text, View, TextInput, Alert, FlatList, ActivityIndicator } from 'react-native';
 import { Header, Button } from 'react-native-elements';
 
-export default class GameDetail extends React.Component {
-    static navigationOptions = {title: 'Game Details'};
+export default class GamePlayers extends React.Component {
+    static navigationOptions = {title: 'Game Players'};
     constructor(props){
         super(props);
-        this.state = {home: [], away: [], homeData: [], awayData: [], isLoading: true};
+        this.state = {home: [], away: [], isLoading: true};
     }
 
     componentDidMount(){
@@ -19,10 +19,8 @@ export default class GameDetail extends React.Component {
         fetch(url)
         .then(response => response.json())
         .then(responseJson => {
-            this.setState({ home: responseJson.gameData.teams.home,
-                            away: responseJson.gameData.teams.away,
-                            homeData: responseJson.liveData.boxscore.teams.home.teamStats.teamSkaterStats,
-                            awayData: responseJson.liveData.boxscore.teams.away.teamStats.teamSkaterStats,
+            this.setState({ home: responseJson.liveData.boxscore.teams.home.players,
+                            away: responseJson.liveData.boxscore.teams.away.players,
                             isLoading: false});
        })
                 .catch((error) => {
@@ -49,12 +47,12 @@ export default class GameDetail extends React.Component {
 
       <View style={styles.cardTop}>
       <View>
-        <Text style={styles.teamText}>{this.state.home.teamName}</Text>
-        <Text style={styles.scoreText}>{this.state.homeData.goals}</Text>
+        <Text style={styles.teamText}>Home</Text>
+        <Text style={styles.scoreText}>Players</Text>
         </View>
       <View>
-       <Text style={styles.teamText}>{this.state.away.teamName}</Text>
-       <Text style={styles.scoreText}>{this.state.awayData.goals}</Text>
+       <Text style={styles.teamText}>Away</Text>
+       <Text style={styles.scoreText}>Players</Text>
         </View>
       </View>
 

@@ -5,31 +5,19 @@ import { List, ListItem } from "react-native-elements";
 
 
 export default class ScheduleDetail extends React.Component {
-      static navigationOptions = {title: 'Match'}; 
+      static navigationOptions = {title: 'Highlights'};
     constructor(props){
       super(props);
       this.state = {game: [], isLoading: true, highlights: []}
     }
-    
-    
+
+
     componentDidMount(){
-        this.getGameDetail();
         this.getHighlights();
     }
-    
-    getGameDetail = () => {
-        const { gamePk } = this.props.navigation.state.params;
-        const url='http://statsapi.web.nhl.com/api/v1/game/'+ gamePk +'/feed/live';
-        fetch(url)
-        .then(response => response.json())
-        .then(responseJson => {
-            this.setState({ game: responseJson});
-       })
-                .catch((error) => {
-                  Alert.alert(error);
-                });
-    }
-    
+
+
+
    getHighlights = () => {
         const { gamePk } = this.props.navigation.state.params;
         const url='http://statsapi.web.nhl.com/api/v1/game/'+ gamePk +'/content';
@@ -37,22 +25,22 @@ export default class ScheduleDetail extends React.Component {
         .then(response => response.json())
         .then(responseJson => {
             this.setState({ highlights: responseJson.highlights.gameCenter.items,
-                            isLoading: false   
+                            isLoading: false
             });
         })
     }
-   
+
    getHighlightVideo = (item) => {
         this.props.navigation.navigate('HighlightVideo', {...item});
    }
-    
- 
+
+
   render() {
       if (this.state.isLoading) {
       return (
         <View style={{ flex: 1, paddingTop: 20 }}>
           <ActivityIndicator />
-          <Text> Loading.... Ba dim ba dimb duu! </Text>
+          <Text> Loading.... Ba dim ba dimb ba duu! </Text>
         </View>
       );
       }
@@ -61,21 +49,21 @@ export default class ScheduleDetail extends React.Component {
         <Text style={styles.text}>
         Highlights of the game:
         </Text>
-        
+
         <List>
-        <FlatList 
+        <FlatList
         data={this.state.highlights}
         keyExtractor={item => item.id}
-        renderItem={({item}) => <ListItem 
+        renderItem={({item}) => <ListItem
         title={item.title}
         subtitle={item.duration}
          onPress={() => this.getHighlightVideo(item)}
         />}/>
-        </List>  
-        
+        </List>
+
       </View>
     );
-  }        
+  }
 }
 
 const styles = StyleSheet.create({
@@ -89,6 +77,6 @@ const styles = StyleSheet.create({
   },
     text: {
         textAlign: 'center'
-        
-    }      
+
+    }
 });

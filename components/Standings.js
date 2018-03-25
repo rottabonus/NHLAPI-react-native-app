@@ -8,71 +8,55 @@ export default class Standings extends React.Component {
    static navigationOptions = {header: null};
     constructor(props){
       super(props);
-      this.state = {standings: [], isLoading: true}
+      this.state = {standings: [], isLoading: true, currStandings: [], division: 0}
     }
-    
+
     componentDidMount(){
-        this.getMetropolitan()
+        this.getStandings();
+
     }
+
+    getStandings = () => {
+                fetch(url)
+                .then((response) => response.json())
+                .then((responseJson) =>  {
+                  this.setState({
+                    standings: responseJson.records,
+                    isLoading: false});
+                })
+                .catch((error) => {
+                  Alert.alert(error);
+                });
+    }
+
+    changeData = (id) => {
+	           this.setState({
+               currStandings: this.state.standings[id].teamRecords
+             });
+                          }
 
     getMetropolitan = () => {
-                fetch(url)
-                .then((response) => response.json())
-                .then((responseJson) =>  {
-                this.setState({
-                  standings: responseJson.records[0].teamRecords,
-                isLoading: false});
-                })
-                .catch((error) => {
-                  Alert.alert(error);
-                });
+        let id = 0;
+        this.changeData(id);
     }
-    
-getAtlantic = () => {
-      
-                fetch(url)
-                .then((response) => response.json())
-                .then((responseJson) =>  {
-                this.setState({
-                  standings: responseJson.records[1].teamRecords,
-                isLoading: false});
-                })
-                .catch((error) => {
-                  Alert.alert(error);
-                });
+    getAtlantic = () => {
+      let id = 1;
+      this.changeData(id);
     }
 
-getCentral = () => {
-      
-                fetch(url)
-                .then((response) => response.json())
-                .then((responseJson) =>  {
-                this.setState({
-                  standings: responseJson.records[2].teamRecords,
-                isLoading: false});
-                })
-                .catch((error) => {
-                  Alert.alert(error);
-                });
+    getCentral = () => {
+      let id = 2;
+        this.changeData(id);
     }
 
-getPacific = () => {
-      
-                fetch(url)
-                .then((response) => response.json())
-                .then((responseJson) =>  {
-                this.setState({
-                  standings: responseJson.records[3].teamRecords,
-                isLoading: false});
-                })
-                .catch((error) => {
-                  Alert.alert(error);
-                });
+    getPacific = () => {
+      let id = 3;
+        this.changeData(id);
     }
 
-getTeam = (item) => {
+    getTeam = (item) => {
         this.props.navigation.navigate('StandingDetail', {...item});
-}
+      }
 
   render() {
       if (this.state.isLoading) {
@@ -85,37 +69,37 @@ getTeam = (item) => {
       }
     return (
         <View style={styles.header}>
-        
+
                 <Header placement="left"
                 leftComponent={{ icon: 'menu', color: '#fff',
                 onPress: () => this.props.navigation.navigate('DrawerOpen')}}
                 centerComponent={{ text: 'Standings', style: { color: '#fff' } }}
                 rightComponent={{ icon: 'home', color: '#fff',
                  onPress: () => this.props.navigation.navigate('Frontpage')}}/>
-        
+
       <View style={styles.container}>
-        
-        
-        
-        <View style={styles.buttons}>       
+
+
+
+        <View style={styles.buttons}>
         <Button onPress={this.getMetropolitan} title="Metropolitan" />
-        <Button onPress={this.getAtlantic} title="Atlantic" />   
+        <Button onPress={this.getAtlantic} title="Atlantic" />
         <Button onPress={this.getCentral} title="Central" />
         <Button onPress={this.getPacific} title="Pacific" />
-        </View>    
+        </View>
         <View>
         </View>
         <List>
-        <FlatList 
-        data={this.state.standings}
+        <FlatList
+        data={this.state.currStandings}
         keyExtractor={item => item.team.id}
-        renderItem={({item}) => <ListItem 
+        renderItem={({item}) => <ListItem
         title={item.team.name}
         subtitle={`GP:${item.gamesPlayed} W:${item.leagueRecord.wins} L:${item.leagueRecord.losses} OT:${item.leagueRecord.ot} PTS:${item.points}`}
         onPress={() => this.getTeam(item)}
         />}/>
-        </List>  
-        </View>  
+        </List>
+        </View>
       </View>
     );
   }
@@ -136,9 +120,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
        justifyContent: 'space-around',
         padding: 1
-         
+
     },
     header: {
         flex: 1
-    }   
+    }
 });
