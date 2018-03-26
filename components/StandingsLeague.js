@@ -3,13 +3,13 @@ import { StyleSheet, Text, View, FlatList, TextInput, Alert, ActivityIndicator} 
 import { List, ListItem, Button, Header } from "react-native-elements";
 import { SQLite } from 'expo';
 
-const url= 'http://statsapi.web.nhl.com/api/v1/standings/';
+const url= 'http://statsapi.web.nhl.com/api/v1/standings/byLeague';
 const db = SQLite.openDatabase('favourites.db');
-export default class Standings extends React.Component {
+export default class StandingsLeague extends React.Component {
    static navigationOptions = {header: null};
     constructor(props){
       super(props);
-      this.state = {standings: [], isLoading: true, currStandings: [], division: 0}
+      this.state = {standings: [], isLoading: true}
     }
 
 
@@ -18,12 +18,13 @@ export default class Standings extends React.Component {
 
     }
 
+
     getStandings = () => {
                 fetch(url)
                 .then((response) => response.json())
                 .then((responseJson) =>  {
                   this.setState({
-                    standings: responseJson.records,
+                    standings: responseJson.records[0].teamRecords,
                     isLoading: false});
                 })
                 .catch((error) => {
@@ -31,30 +32,6 @@ export default class Standings extends React.Component {
                 });
     }
 
-    changeData = (id) => {
-	           this.setState({
-               currStandings: this.state.standings[id].teamRecords
-             });
-                          }
-
-    getMetropolitan = () => {
-        let id = 0;
-        this.changeData(id);
-    }
-    getAtlantic = () => {
-      let id = 1;
-      this.changeData(id);
-    }
-
-    getCentral = () => {
-      let id = 2;
-        this.changeData(id);
-    }
-
-    getPacific = () => {
-      let id = 3;
-        this.changeData(id);
-    }
 
     getTeam = (id) => {
         this.props.navigation.navigate('StandingDetail', {...id});
@@ -65,6 +42,8 @@ export default class Standings extends React.Component {
           tx.executeSql('insert into favteams (name, id) values (?, ?)', [name, id]);
         }, null, Alert.alert('added to favourites'))
       }
+
+
 
   render() {
       if (this.state.isLoading) {
@@ -81,25 +60,17 @@ export default class Standings extends React.Component {
                 <Header placement="left"
                 leftComponent={{ icon: 'menu', color: '#fff',
                 onPress: () => this.props.navigation.navigate('DrawerOpen')}}
-                centerComponent={{ text: 'Divisions', style: { color: '#fff' } }}
+                centerComponent={{ text: 'League', style: { color: '#fff' } }}
                 rightComponent={{ icon: 'home', color: '#fff',
                  onPress: () => this.props.navigation.navigate('Frontpage')}}/>
 
       <View style={styles.container}>
 
-
-
-        <View style={styles.buttons}>
-        <Button onPress={this.getMetropolitan} title="Metropolitan" />
-        <Button onPress={this.getAtlantic} title="Atlantic" />
-        <Button onPress={this.getCentral} title="Central" />
-        <Button onPress={this.getPacific} title="Pacific" />
-        </View>
         <View>
         </View>
-        <List>
+        <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
         <FlatList
-        data={this.state.currStandings}
+        data={this.state.standings}
         keyExtractor={item => item.team.id}
         renderItem={({item}) => <ListItem
         title={item.team.name}

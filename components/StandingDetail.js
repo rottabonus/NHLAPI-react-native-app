@@ -2,25 +2,37 @@ import React from 'react';
 import { StyleSheet, Text, View, ActivityIndicator, FlatList, Alert} from 'react-native';
 import { List, ListItem } from "react-native-elements";
 
+
 const url = 'http://statsapi.web.nhl.com/api/v1/teams';
 
+
 export default class StandingDetail extends React.Component {
-   static navigationOptions = {title: 'Team'};
+   static navigationOptions = {title: 'Players'};
     constructor(props){
       super(props);
       this.state = {data: [], isLoading: true}
     }
-    
-    componentDidMount(){
-        this.getData();
+
+    componentWillMount(){
+      this.checkId();
     }
-    
+
+    checkId = () => {
+      const { id } = this.props.navigation.state.params;
+      if(id){
+        this.getDataFav();
+      } else {
+        this.getData();
+      }
+    }
+
+
     getData  = () => {
         const { team } = this.props.navigation.state.params;
                 fetch(url)
                 .then((response) => response.json())
-                .then((responseJson) =>  {   
-                 for (i = 0; i < responseJson.teams.length; i++) {   
+                .then((responseJson) =>  {
+                 for (i = 0; i < responseJson.teams.length; i++) {
                  let teamId = responseJson.teams[i].id;
                      if (team.id == teamId) {
                 this.setState({
@@ -32,9 +44,27 @@ export default class StandingDetail extends React.Component {
                   Alert.alert(error);
                 });
     }
-    
-   
-    
+
+    getDataFav  = () => {
+        const { id } = this.props.navigation.state.params;
+                fetch(url)
+                .then((response) => response.json())
+                .then((responseJson) =>  {
+                 for (i = 0; i < responseJson.teams.length; i++) {
+                 let teamId = responseJson.teams[i].id;
+                     if (id == teamId) {
+                this.setState({
+                  data: responseJson.teams[i]
+                });
+                         this.getPlayers();
+                }}})
+                .catch((error) => {
+                  Alert.alert(error);
+                });
+    }
+
+
+
      getPlayers = () => {
         const url = 'http://statsapi.web.nhl.com/api/v1/teams/' + this.state.data.id + '?hydrate=roster(person(stats(splits=statsSingleSeason)))';
         fetch(url)
@@ -47,11 +77,11 @@ export default class StandingDetail extends React.Component {
                   Alert.alert(error);
                 });
     }
-     
+
    getPlayerDetails = (item) => {
         this.props.navigation.navigate('Player', {...item});
     }
-    
+
   render() {
       if (this.state.isLoading) {
       return (
@@ -66,20 +96,21 @@ export default class StandingDetail extends React.Component {
         <Text style={styles.text}>
        {this.state.data.name}
         </Text>
-        
+
         <List>
-        <FlatList 
+        <FlatList
         data={this.state.players}
         keyExtractor={item => item.jerseyNumber}
-        renderItem={({item}) => <ListItem 
+        renderItem={({item}) => <ListItem
         title={`${item.person.fullName} # ${item.jerseyNumber}`}
         subtitle={item.position.name}
         onPress={() => this.getPlayerDetails(item)}
+
         />}/>
-        </List>  
-        
-        
-        
+        </List>
+
+
+
       </View>
     );
   }
@@ -96,9 +127,9 @@ const styles = StyleSheet.create({
   },
     text: {
         textAlign: 'center'
-        
+
     }
-    
-    
-    
+
+
+
 });
