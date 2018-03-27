@@ -1,8 +1,10 @@
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
+Some UI elements are from React Native Elements(https://react-native-training.github.io/react-native-elements/)
+
 This application uses the ['Undocumented NHL API'](http://statsapi.web.nhl.com/api/v1)
 
-This application is under construction!
+Application is under construction!
 
 **Implemented features**:
 
@@ -16,11 +18,16 @@ This application is under construction!
     1. Player info and Player stats by season
 1. Get player by name
     1. Basic validation for player-search by name (app wont crash)
+1. Save favourite Team
+1. Standings:
+    1. League
+    1. Divisions
 
 **Todo:**
 
 1. Find players by nationality
-1. Save favourite team
 1. Login
-1. More in-game statistics
-1. Standings for league (not only divisions)
+1. Styles
+1. Playoff brackets
+1. Save favourite player
+
