@@ -9,22 +9,22 @@ export default class Player extends React.Component {
     constructor(props){
         super(props);
         this.state = {isGoalie: false, notPlayed: false, isLoading: true, career: [], season: []}
-        
+
     }
-    
-    
-    
+
+
+
     componentWillMount(){
         this.checkGoalie();
         this.getCareerStats();
     }
-    
+
     componentDidMount(){
         this.setState({isLoading: false});
     }
-    
-    
-    
+
+
+
     checkGoalie = () => {
         const { person } = this.props.navigation.state.params
         if(person.primaryPosition.name === "Goalie"){
@@ -34,17 +34,17 @@ export default class Player extends React.Component {
             Alert.alert("is a goalie");
         }
     }
-    
-  
-    
-    
+
+
+
+
     getCareerStats = () => {
         const { person } = this.props.navigation.state.params
     const url = 'http://statsapi.web.nhl.com/api/v1/people/'+person.id+'?hydrate=stats(splits=yearByYear)';
         fetch(url)
         .then(response => response.json())
         .then(responseJson => {
-             
+
             let nhl = "National Hockey League";
             for(i = 0; i < responseJson.people[0].stats[0].splits.length; i++){
                 if(responseJson.people[0].stats[0].splits[i].league.name === nhl){
@@ -54,11 +54,11 @@ export default class Player extends React.Component {
         .catch((error) => {
                   Alert.alert(error);
                 });
-        
-        
+
+
     }
-    
-    
+
+
   render() {
      const { person } = this.props.navigation.state.params
      if (this.state.isLoading) {
@@ -69,8 +69,8 @@ export default class Player extends React.Component {
         </View>
       );
       }
-     
-     if(this.state.notPlayed){
+
+     if(this.state.career.length < 1){
          return(
          <View style={styles.container}>
          <View style={styles.cardTop}>
@@ -81,7 +81,7 @@ export default class Player extends React.Component {
         <Text>Nationality: {person.nationality}</Text>
         <Text>Position: {person.primaryPosition.name}</Text>
         </View>
-        
+
         <View style={styles.image}>
         <Image
           style={{width: 140, height: 140}}
@@ -89,11 +89,20 @@ export default class Player extends React.Component {
         />
         </View>
         </View>
+
+        <View style={styles.cardTop}>
+        <View>
+        <Image style={{width:150, height: 300, marginLeft: '10%'}}
+        source={require('../images/Skelli.png')} />
+        </View>
+        <View>
+        <Text> No games on NHL </Text>
+        </View></View>
       </View>
          );
      }
-     
-     
+
+
     if (this.state.isGoalie){
         return(
         <View style={styles.container}>
@@ -105,7 +114,7 @@ export default class Player extends React.Component {
         <Text>Nationality: {person.nationality}</Text>
         <Text>Position: {person.primaryPosition.name}</Text>
         </View>
-        
+
         <View style={styles.image}>
         <Image
           style={{width: 140, height: 140}}
@@ -113,9 +122,9 @@ export default class Player extends React.Component {
         />
         </View>
         </View>
-        
+
         <View style={styles.cardBot}>
-        
+
         <View style={styles.stats}>
          <Text> Stats </Text>
         <Text> Games: {this.state.season.games} </Text>
@@ -131,27 +140,27 @@ export default class Player extends React.Component {
         <Text> ShotsAgainst: {this.state.season.shotsAgainst} </Text>
         <Text> Time on ice: {this.state.season.timeOnIce} </Text>
         </View>
-        
+
         <View style={styles.stats}>
         <Text> Select season </Text>
         <Picker
         style={{width: 140 }}
             selectedItem={this.state.season}
- 
+
             onValueChange={(itemValue, itemIndex) => this.setState({season: itemValue})} >
- 
+
             { this.state.career.map((item, key)=>(
             <Picker.Item label={item.season} value={item.stat} key={key} />)
             )}
-    
+
           </Picker>
         </View>
-        
+
         </View>
       </View>
         );
     }
-    
+
     return (
       <View style={styles.container}>
          <View style={styles.cardTop}>
@@ -162,7 +171,7 @@ export default class Player extends React.Component {
         <Text>Nationality: {person.nationality}</Text>
         <Text>Position: {person.primaryPosition.name}</Text>
         </View>
-        
+
         <View style={styles.image}>
         <Image
           style={{width: 140, height: 140}}
@@ -170,9 +179,9 @@ export default class Player extends React.Component {
         />
         </View>
         </View>
-        
+
         <View style={styles.cardBot}>
-        
+
         <View style={styles.stats}>
          <Text> Stats </Text>
         <Text> Games: {this.state.season.games} </Text>
@@ -187,22 +196,22 @@ export default class Player extends React.Component {
         <Text> Shifts: {this.state.season.shifts} </Text>
         <Text> Time on ice: {this.state.season.timeOnIce} </Text>
         </View>
-        
+
         <View style={styles.stats}>
         <Text> Select season </Text>
         <Picker
         style={{width: 140 }}
             selectedValue={this.state.season}
- 
+
             onValueChange={(itemValue, itemIndex) => this.setState({season: itemValue})} >
- 
+
             { this.state.career.map((item, key)=>(
             <Picker.Item label={item.season} value={item.stat} key={key} />)
             )}
-    
+
           </Picker>
         </View>
-        
+
         </View>
       </View>
     );
@@ -230,7 +239,7 @@ const styles = StyleSheet.create({
     image: {
         padding: 20
     },
-    
+
     cardBot: {
         flexDirection: 'row'
     }

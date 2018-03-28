@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, Alert, FlatList } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Alert, FlatList, Image } from 'react-native';
 import { Header, Button, List, ListItem } from 'react-native-elements';
 
 
@@ -7,11 +7,21 @@ export default class Front extends React.Component {
     static navigationOptions = {header: null};
     constructor(props){
         super(props);
-        this.state = {favTeams: []};
+        this.state = {favTeams: [], help: false};
     }
 
 
-
+showHelp = () => {
+  if(this.state.help){
+    this.setState({
+          help: false
+        });
+  } else {
+    this.setState({
+        help: true
+    });
+  }
+}
 
 
   render() {
@@ -26,14 +36,24 @@ export default class Front extends React.Component {
                  onPress: () => this.props.navigation.navigate('Frontpage')}}/>
 
       <View style={styles.container}>
+      <View>
+      <View style={{alignSelf: 'flex-end', marginRight: '5%'}}>
+      <Text style={{fontWeight: 'bold', fontSize: 20}} onPress={this.showHelp}> ? </Text>
+    </View>
+      <View>
         <Text style={styles.welcome}> Welcome </Text>
+        </View></View>
         <Text style={styles.frontText}> This bootstrapped create-react-native-app uses the famous 'uncodumented' NHL
         API to show some statistics with serious styles. </Text>
-        <Text style={styles.featureText}> Search: Search a player by name </Text>
-        <Text style={styles.featureText}> Standings: Show league and division standings </Text>
-        <Text style={styles.featureText}> Games: Show scheduled games for today, yesterday or by date </Text>
-        <Text style={styles.featureText}> GameDetails: show HighlightVideos and stats from game </Text>
-        <Text style={styles.featureText}> Lists: Navigate by pushing listitems, and long pressing to save to favourites!</Text>
+
+        {
+        this.state.help ? <Text style={styles.featureText}> Search: Search a player by name{'\n'} Standings: Show league and division standings{'\n'}
+        Games: Show scheduled games for today, yesterday or by date{'\n'} GameDetails: show HighlightVideos and stats from game{'\n'}
+        Lists: Navigate by pushing listitems, and long pressing to save to favourites!</Text> : <Image style={{width:150, height: 300, alignSelf: 'center'}}
+        source={require('../images/Skelli.png')} />
+        }
+
+
 
       </View></View>
     );
@@ -70,6 +90,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 14,
     padding: 5
+},
+
+row: {
+  flexDirection: 'row'
 }
 
 });

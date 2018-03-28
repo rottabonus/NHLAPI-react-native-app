@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, Alert, FlatList, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Alert, FlatList, ActivityIndicator, Image } from 'react-native';
 import { Header, Button } from 'react-native-elements';
 
 export default class GameDetail extends React.Component {
@@ -56,7 +56,9 @@ export default class GameDetail extends React.Component {
      if(this.state.periods.length === 0){
        return(
          <View style={styles.container}>
-        <Text> Game not played (here image) </Text>
+         <Image style={{width:250, height: 300, alignSelf: 'center', paddingTop: 15}}
+         source={require('../images/Skelli.png')} />
+         <Text style={{textAlign: 'center', fontSize: 22, padding: 8}}> Game not played yet </Text>
          </View>
        )
      }

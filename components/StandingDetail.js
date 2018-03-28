@@ -100,7 +100,7 @@ export default class StandingDetail extends React.Component {
         <List>
         <FlatList
         data={this.state.players}
-        keyExtractor={item => item.jerseyNumber}
+        keyExtractor={item => item.person.id}
         renderItem={({item}) => <ListItem
         title={`${item.person.fullName} # ${item.jerseyNumber}`}
         subtitle={item.position.name}

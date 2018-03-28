@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, Alert, FlatList } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Alert, FlatList, Image } from 'react-native';
 import { Header, Button, List, ListItem } from 'react-native-elements';
 import { SQLite } from 'expo';
 
@@ -38,6 +38,15 @@ deleteTeam = (id) => {
       }
 
   render() {
+    if(this.state.favTeams.length < 1){
+      return(
+        <View style={styles.containerNoFav}>
+        <Image style={{width:250, height: 300, alignSelf: 'center'}}
+        source={require('../images/Skelli.png')} />
+        <Text style={{textAlign: 'center', fontSize: 22, padding: 8}}> No Favourites </Text>
+        </View>
+      )
+    }
     return (
         <View style={styles.header}>
 
@@ -81,6 +90,14 @@ const styles = StyleSheet.create({
   text: {
         textAlign: 'center',
         fontSize: 22
-  }
+  },
+
+  containerNoFav: {
+    flex: 1,
+    backgroundColor: '#fff',
+      borderColor: 'gray',
+      margin: 20,
+      justifyContent: 'center'
+  },
 
 });
