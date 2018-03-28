@@ -104,6 +104,7 @@ export default class StandingDetail extends React.Component {
         renderItem={({item}) => <ListItem
         title={`${item.person.fullName} # ${item.jerseyNumber}`}
         subtitle={item.position.name}
+        avatar={{uri: 'https://nhl.bamcontent.com/images/headshots/current/168x168/'+item.person.id+'.jpg'}}
         onPress={() => this.getPlayerDetails(item)}
 
         />}/>

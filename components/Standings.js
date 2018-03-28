@@ -13,10 +13,11 @@ export default class Standings extends React.Component {
     }
 
 
-    componentDidMount(){
+    componentWillMount(){
         this.getStandings();
 
     }
+
 
     getStandings = () => {
                 fetch(url)
@@ -103,9 +104,12 @@ export default class Standings extends React.Component {
         keyExtractor={item => item.team.id}
         renderItem={({item}) => <ListItem
         title={item.team.name}
-        subtitle={`GP:${item.gamesPlayed} W:${item.leagueRecord.wins} L:${item.leagueRecord.losses} OT:${item.leagueRecord.ot} PTS:${item.points}`}
+        subtitle={`RANK:${item.divisionRank} GP:${item.gamesPlayed} W:${item.leagueRecord.wins} L:${item.leagueRecord.losses} OT:${item.leagueRecord.ot} PTS:${item.points}`}
         onPress={() => this.getTeam(item)}
         onLongPress={() => this.saveTeam(item.team.name, item.team.id)}
+        subtitleStyle={{fontSize: 14}}
+        titleStyle={{color: '#7ab3ef', fontWeight: 'bold'}}
+        hideChevron={true}
         />}/>
         </List>
         </View>

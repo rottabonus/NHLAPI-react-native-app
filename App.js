@@ -12,6 +12,7 @@ import GameDetail from './components/GameDetail';
 import GamePlayers from './components/GamePlayers';
 import TeamDetail from './components/TeamDetails';
 import StandingsLeague from './components/StandingsLeague';
+import Favourites from './components/Favourites';
 
 export default class App extends React.Component {
   render() {
@@ -46,6 +47,8 @@ const TabTeam = TabNavigator({
 }
 );
 
+
+
 const TabStandings = TabNavigator({
       League: {screen: StandingsLeague},
       Divisions: {screen: Standings}
@@ -57,6 +60,23 @@ const TabStandings = TabNavigator({
         }
     }
     );
+
+const  TabFront = TabNavigator({
+      Frontpage: {screen: Front},
+      Favourites: {screen: Favourites}
+    }, {
+        tabBarPosition: 'bottom',
+        animationEnabled: true,
+        style: {
+          backgroundColor: 'gray'
+        }
+    }
+    );
+
+const StackFront = StackNavigator({
+        Front: {screen: TabFront},
+        Favourite: {screen: TabTeam}
+})
 
 const  StackStanding = StackNavigator({
         Standings: {screen: TabStandings},
@@ -71,11 +91,6 @@ const StackSchedule = StackNavigator({
         HighlightVideo: {screen: HighlightVideo}
 })
 
-const StackFav = StackNavigator({
-      Frontpage: {screen: Front},
-      Team: {screen: TabTeam}
-})
-
 
 const StackSearch = StackNavigator({
     Search: {screen: Search},
@@ -84,7 +99,7 @@ const StackSearch = StackNavigator({
 
 const DrawerNavigation = DrawerNavigator({
 
-          Frontpage: {screen: StackFav},
+          Frontpage: {screen: StackFront},
         Search: {screen: StackSearch},
          Standings: {screen: StackStanding},
         Games: {screen: StackSchedule},

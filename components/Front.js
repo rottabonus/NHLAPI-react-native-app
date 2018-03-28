@@ -1,9 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, Alert, FlatList } from 'react-native';
 import { Header, Button, List, ListItem } from 'react-native-elements';
-import { SQLite } from 'expo';
 
-const db = SQLite.openDatabase('favourites.db');
 
 export default class Front extends React.Component {
     static navigationOptions = {header: null};
@@ -12,30 +10,9 @@ export default class Front extends React.Component {
         this.state = {favTeams: []};
     }
 
-componentDidMount(){
-  db.transaction(tx => {
-    tx.executeSql('create table if not exists favteams (listid integer primary key not null, name text, id int);');
-  });
-  this.updateList();
-}
 
-updateList = () => {
-  db.transaction(tx => {
-    tx.executeSql('select * from favteams', [], (_, { rows }) =>
-                  this.setState({favTeams: rows._array})
-                );
-  });
-}
 
-deleteTeam = (id) => {
-    db.transaction(tx => {
-        tx.executeSql('delete from favteams where listid = ?;', [id]);}, null,
-        this.updateList)
-    }
 
-    getTeam = (item) => {
-        this.props.navigation.navigate('StandingDetail', {...item});
-      }
 
   render() {
     return (
@@ -49,18 +26,14 @@ deleteTeam = (id) => {
                  onPress: () => this.props.navigation.navigate('Frontpage')}}/>
 
       <View style={styles.container}>
-        <Text> This is frontpage </Text>
-
-        <List>
-        <FlatList
-            data={this.state.favTeams}
-            keyExtractor={item => item.listid}
-            renderItem={({item}) => <ListItem
-            title={item.name}
-            subtitle={item.id}
-            onPress={() => this.getTeam(item)}
-            onLongPress={() => this.deleteTeam(item.listid)}/>}/>
-      </List>
+        <Text style={styles.welcome}> Welcome </Text>
+        <Text style={styles.frontText}> This bootstrapped create-react-native-app uses the famous 'uncodumented' NHL
+        API to show some statistics with serious styles. </Text>
+        <Text style={styles.featureText}> Search: Search a player by name </Text>
+        <Text style={styles.featureText}> Standings: Show league and division standings </Text>
+        <Text style={styles.featureText}> Games: Show scheduled games for today, yesterday or by date </Text>
+        <Text style={styles.featureText}> GameDetails: show HighlightVideos and stats from game </Text>
+        <Text style={styles.featureText}> Lists: Navigate by pushing listitems, and long pressing to save to favourites!</Text>
 
       </View></View>
     );
@@ -77,6 +50,26 @@ const styles = StyleSheet.create({
   },
  header: {
         flex: 1
-    }
+    },
+
+  frontText: {
+      textAlign: 'center',
+      fontSize: 16,
+      padding: 15
+  },
+
+  welcome: {
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#7ab3ef',
+    paddingTop: 30
+  },
+
+  featureText: {
+    textAlign: 'center',
+    fontSize: 14,
+    padding: 5
+}
 
 });

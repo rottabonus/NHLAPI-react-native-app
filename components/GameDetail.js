@@ -76,47 +76,77 @@ export default class GameDetail extends React.Component {
           </View>
         </View>
 
-          <View style={styles.cardBot}>
-          <View style={styles.periodOne}>
-          <Text style={styles.scoreText}> 1st </Text>
-          <Text> hGoals: {this.state.periods[0].home.goals} </Text>
-           </View>
-          <View style={styles.periodOne}>
-          <Text style={styles.scoreText}> 1st </Text>
-          <Text> aGoals: {this.state.periods[0].away.goals} </Text>
-           </View>
-          </View>
+        <View style={styles.cardGame}>
+        <View>
+        <Text>Shots: {this.state.homeData.shots}</Text>
+        <Text>Powerplay goals: {this.state.homeData.powerPlayGoals}</Text>
+        <Text>PenaltyMinutes: {this.state.homeData.pim}</Text>
+        <Text>Blocked: {this.state.homeData.blocked}</Text>
+        <Text>Giveaways: {this.state.homeData.giveaways}</Text>
+        <Text>Hits: {this.state.homeData.hits}</Text>
+        </View>
+        <View>
+        <Text>Shots: {this.state.awayData.shots}</Text>
+        <Text>Powerplay goals: {this.state.awayData.powerPlayGoals}</Text>
+        <Text>PenaltyMinutes: {this.state.awayData.pim}</Text>
+        <Text>Blocked: {this.state.awayData.blocked}</Text>
+        <Text>Giveaways: {this.state.awayData.giveaways}</Text>
+        <Text>Hits: {this.state.awayData.hits}</Text>
+        </View></View>
 
-          <View style={styles.cardBot}>
-          <View style={styles.periodTwo}>
-          <Text style={styles.scoreText}> 2nd </Text>
-          <Text> hGoals: {this.state.periods[1].home.goals} </Text>
-           </View>
-          <View style={styles.periodTwo}>
-          <Text style={styles.scoreText}> 2nd </Text>
-          <Text> aGoals: {this.state.periods[1].away.goals} </Text>
-           </View>
-          </View>
-
-          <View style={styles.cardBot}>
-          <View style={styles.periodOne}>
-          <Text style={styles.scoreText}> 3rd </Text>
-          <Text> hGoals: {this.state.periods[2].home.goals} </Text>
-           </View>
-          <View style={styles.periodOne}>
-          <Text style={styles.scoreText}> 3rd </Text>
-          <Text> aGoals: {this.state.periods[2].away.goals} </Text>
-          </View>
+        <View style={styles.periodOne}>
+        <View>
+        <Text> Goals: {this.state.periods[0].home.goals} </Text>
+        <Text> Shots on Goal: {this.state.periods[0].home.shotsOnGoal} </Text>
          </View>
 
-          <View style={styles.cardBot}>
+         <View><Text style={styles.scoreText}> 1st </Text></View>
+
+        <View>
+        <Text> Goals: {this.state.periods[0].away.goals} </Text>
+        <Text> Shots on Goal: {this.state.periods[0].away.shotsOnGoal} </Text>
+         </View>
+        </View>
+
+        <View style={styles.periodTwo}>
+        <View>
+        <Text> Goals: {this.state.periods[1].home.goals} </Text>
+        <Text> Shots on Goal: {this.state.periods[1].home.shotsOnGoal} </Text>
+         </View>
+
+         <View><Text style={styles.scoreText}> 2nd </Text></View>
+
+        <View>
+        <Text> Goals: {this.state.periods[1].away.goals} </Text>
+        <Text> Shots on Goal: {this.state.periods[1].away.shotsOnGoal} </Text>
+         </View>
+        </View>
+
+        <View style={styles.periodOne}>
+        <View>
+        <Text> Goals: {this.state.periods[2].home.goals} </Text>
+        <Text> Shots on Goal: {this.state.periods[2].home.shotsOnGoal} </Text>
+         </View>
+
+         <View><Text style={styles.scoreText}> 3rd </Text></View>
+
+        <View>
+        <Text> Goals: {this.state.periods[2].away.goals} </Text>
+        <Text> Shots on Goal: {this.state.periods[2].away.shotsOnGoal} </Text>
+        </View>
+       </View>
+
           <View style={styles.periodTwo}>
-          <Text style={styles.scoreText}> OT </Text>
-          <Text> hGoals: {this.state.periods[3].home.goals} </Text>
+          <View>
+          <Text> Goals: {this.state.periods[3].home.goals} </Text>
+          <Text> Shots on Goal: {this.state.periods[3].home.shotsOnGoal} </Text>
            </View>
-          <View style={styles.periodTwo}>
-          <Text style={styles.scoreText}> OT </Text>
-          <Text> aGoals: {this.state.periods[3].away.goals} </Text>
+
+           <View><Text style={styles.scoreText}> OT </Text></View>
+
+          <View>
+          <Text> Goals: {this.state.periods[3].away.goals} </Text>
+          <Text> Shots on Goal: {this.state.periods[3].away.shotsOnGoal} </Text>
            </View>
           </View>
 
@@ -139,38 +169,65 @@ export default class GameDetail extends React.Component {
         </View>
       </View>
 
-        <View style={styles.cardBot}>
-        <View style={styles.periodOne}>
-        <Text style={styles.scoreText}> 1st </Text>
-        <Text> hGoals: {this.state.periods[0].home.goals} </Text>
-         </View>
-        <View style={styles.periodOne}>
-        <Text style={styles.scoreText}> 1st </Text>
-        <Text> aGoals: {this.state.periods[0].away.goals} </Text>
-         </View>
-        </View>
+      <View style={styles.cardGame}>
+      <View>
+      <Text>Shots: {this.state.homeData.shots}</Text>
+      <Text>Powerplay goals: {this.state.homeData.powerPlayGoals}</Text>
+      <Text>PenaltyMinutes: {this.state.homeData.pim}</Text>
+      <Text>Blocked: {this.state.homeData.blocked}</Text>
+      <Text>Giveaways: {this.state.homeData.giveaways}</Text>
+      <Text>Hits: {this.state.homeData.hits}</Text>
+      </View>
+      <View>
+      <Text>Shots: {this.state.awayData.shots}</Text>
+      <Text>Powerplay goals: {this.state.awayData.powerPlayGoals}</Text>
+      <Text>PenaltyMinutes: {this.state.awayData.pim}</Text>
+      <Text>Blocked: {this.state.awayData.blocked}</Text>
+      <Text>Giveaways: {this.state.awayData.giveaways}</Text>
+      <Text>Hits: {this.state.awayData.hits}</Text>
+      </View></View>
 
-        <View style={styles.cardBot}>
-        <View style={styles.periodTwo}>
-        <Text style={styles.scoreText}> 2nd </Text>
-        <Text> hGoals: {this.state.periods[1].home.goals} </Text>
-         </View>
-        <View style={styles.periodTwo}>
-        <Text style={styles.scoreText}> 2nd </Text>
-        <Text> aGoals: {this.state.periods[1].away.goals} </Text>
-         </View>
-        </View>
-
-        <View style={styles.cardBot}>
-        <View style={styles.periodOne}>
-        <Text style={styles.scoreText}> 3rd </Text>
-        <Text> hGoals: {this.state.periods[2].home.goals} </Text>
-         </View>
-        <View style={styles.periodOne}>
-        <Text style={styles.scoreText}> 3rd </Text>
-        <Text> aGoals: {this.state.periods[2].away.goals} </Text>
-        </View>
+      <View style={styles.periodOne}>
+      <View>
+      <Text> Goals: {this.state.periods[0].home.goals} </Text>
+      <Text> Shots on Goal: {this.state.periods[0].home.shotsOnGoal} </Text>
        </View>
+
+       <View><Text style={styles.scoreText}> 1st </Text></View>
+
+      <View>
+      <Text> Goals: {this.state.periods[0].away.goals} </Text>
+      <Text> Shots on Goal: {this.state.periods[0].away.shotsOnGoal} </Text>
+       </View>
+      </View>
+
+      <View style={styles.periodTwo}>
+      <View>
+      <Text> Goals: {this.state.periods[1].home.goals} </Text>
+      <Text> Shots on Goal: {this.state.periods[1].home.shotsOnGoal} </Text>
+       </View>
+
+       <View><Text style={styles.scoreText}> 2nd </Text></View>
+
+      <View>
+      <Text> Goals: {this.state.periods[1].away.goals} </Text>
+      <Text> Shots on Goal: {this.state.periods[1].away.shotsOnGoal} </Text>
+       </View>
+      </View>
+
+      <View style={styles.periodOne}>
+      <View>
+      <Text> Goals: {this.state.periods[2].home.goals} </Text>
+      <Text> Shots on Goal: {this.state.periods[2].home.shotsOnGoal} </Text>
+       </View>
+
+       <View><Text style={styles.scoreText}> 3rd </Text></View>
+
+      <View>
+      <Text> Goals: {this.state.periods[2].away.goals} </Text>
+      <Text> Shots on Goal: {this.state.periods[2].away.shotsOnGoal} </Text>
+      </View>
+     </View>
 
       </View>
     );
@@ -182,8 +239,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
       borderColor: 'gray',
-      margin: 20,
-      paddingBottom: 50
+      margin: 10
   },
  header: {
         flex: 1
@@ -191,7 +247,7 @@ const styles = StyleSheet.create({
  cardTop: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        padding: 10
+        padding: 5
  },
  teamText: {
    fontSize: 30,
@@ -205,15 +261,27 @@ const styles = StyleSheet.create({
  cardBot: {
    flexDirection: 'row',
    justifyContent: 'space-between',
-   padding: 15,
-   paddingTop: 20
+   padding: 5
  },
  periodOne: {
-   backgroundColor: 'gray'
+   backgroundColor: '#deecfb',
+   flexDirection: 'row',
+   justifyContent: 'space-between',
+   padding: 5,
  },
 
  periodTwo: {
-   backgroundColor: 'white'
+   backgroundColor: 'white',
+   flexDirection: 'row',
+   justifyContent: 'space-between',
+   padding: 5,
+ },
+
+ cardGame: {
+   flexDirection: 'row',
+   justifyContent: 'space-between',
+   padding: 5,
+   paddingBottom: 10
  }
 
 
