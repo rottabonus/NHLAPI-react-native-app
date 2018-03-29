@@ -22,12 +22,16 @@ Application is under construction!
 1. Standings:
     1. League
     1. Divisions
+1. Some basic styles
 
 **Todo:**
 
 1. Find players by nationality
 1. Login
-1. Styles
+1. Polished UI
 1. Playoff brackets
 1. Save favourite player
+1. Fix Player Statpage if "Goalie" to fit screen
+1. Fix Search: After searching a player by name and returning to searchpage == reset state
+1. GameDetails: Show playing roster on current Game
 
