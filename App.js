@@ -100,8 +100,9 @@ const StackSearch = StackNavigator({
 const DrawerNavigation = DrawerNavigator({
 
           Frontpage: {screen: StackFront},
-        Search: {screen: StackSearch},
+          Games: {screen: StackSchedule},
          Standings: {screen: StackStanding},
-        Games: {screen: StackSchedule},
+         Search: {screen: StackSearch},
+
 
         })

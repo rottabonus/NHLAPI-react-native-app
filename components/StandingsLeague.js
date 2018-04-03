@@ -43,7 +43,19 @@ export default class StandingsLeague extends React.Component {
         }, null, Alert.alert('added to favourites'))
       }
 
+  _renderItem = data => {
+    const item = data.item;
+    return(
+      <ListItem
+        hideChevron={true}
+        title={item.team.name}
+        rightTitle={`${item.gamesPlayed} ${item.leagueRecord.wins} ${item.leagueRecord.losses} ${item.leagueRecord.ot} ${item.points} `}
+        rightTitleContainerStyle={{alignItems: 'flex-end', flex: 1}}
+        titleContainerStyle={{flex: 1, alignItems: 'flex-start'}}
+        />
 
+    )
+  }
 
   render() {
       if (this.state.isLoading) {
@@ -66,22 +78,18 @@ export default class StandingsLeague extends React.Component {
 
       <View style={styles.container}>
 
+      <View style={{alignSelf: 'flex-end', paddingTop: 20, marginRight: '5%'}}><Text>GP  W   L   OT  P</Text></View>
+
         <View>
         </View>
         <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
         <FlatList
         data={this.state.standings}
         keyExtractor={item => item.team.id}
-        renderItem={({item}) => <ListItem
-        hideChevron={true}
-        title={item.team.name}
-        subtitle={`RANK:${item.leagueRank} GP:${item.gamesPlayed} W:${item.leagueRecord.wins} L:${item.leagueRecord.losses} OT:${item.leagueRecord.ot} PTS:${item.points}`}
+        renderItem={this._renderItem}
         onPress={() => this.getTeam(item)}
         onLongPress={() => this.saveTeam(item.team.name, item.team.id)}
-        subtitleStyle={{fontSize: 14}}
-        titleStyle={{color: '#7ab3ef', fontWeight: 'bold'}}
-
-        />}/>
+        />
         </List>
         </View>
       </View>

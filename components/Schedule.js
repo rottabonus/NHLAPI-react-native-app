@@ -92,8 +92,11 @@ getParsedDate = () => {
 
         <View style={styles.container}>
         <TextInput style={styles.input} placeholder='Date YYYY-MM-DD' onChangeText={(newdate) => this.setState({newdate})} value={this.state.newdate} />
+        <View style={styles.buttons}><View>
         <Button onPress={this.getScheduleDate} title="Search by Date"/>
-
+        </View><View>
+        <Button onPress={this.getYesterday} title="Yesterdays games"/>
+        </View></View>
         <View>
         <Text style={styles.text}>Schedule for {this.state.renderdate}</Text>
         </View>
@@ -107,7 +110,6 @@ getParsedDate = () => {
         onPress={() => this.getMatch(item)}
         />}/>
         </List>
-        <Button onPress={this.getYesterday} title="Yesterdays games"/>
         </View>
         </View>
     );
@@ -136,6 +138,10 @@ input: {
         marginBottom: 5,
         alignSelf: 'center',
         textAlign: 'center'
+},
+
+buttons: {
+  flexDirection: 'row'
 }
 
 });

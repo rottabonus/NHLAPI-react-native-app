@@ -7,7 +7,7 @@ export default class GameDetail extends React.Component {
     constructor(props){
         super(props);
         this.state = {home: [], away: [], periods: [], awayData: [],
-          homeData: [], isLoading: true, overTime: false};
+          homeData: [], isLoading: true};
     }
 
     componentWillMount(){
@@ -26,7 +26,6 @@ export default class GameDetail extends React.Component {
                             awayData: responseJson.liveData.boxscore.teams.away.teamStats.teamSkaterStats,
                             homeData: responseJson.liveData.boxscore.teams.home.teamStats.teamSkaterStats,
                             isLoading: false});
-                            this.checkOverTime();
        })
 
                 .catch((error) => {
@@ -34,13 +33,28 @@ export default class GameDetail extends React.Component {
                 });
     }
 
-    checkOverTime = () => {
-        if(this.state.periods.length > 3){
-          this.setState({
-            overTime: true
-          });
-        }
-    }
+
+_renderItem = data => {
+  const item = data.item;
+  return(
+    <View style={styles.cardBot}>
+      <View>
+    <Text>Goals: {item.home.goals}</Text>
+    <Text>Shots on goal: {item.home.shotsOnGoal}</Text>
+      </View>
+      <View>
+      <Text>{item.ordinalNum}</Text>
+      </View>
+      <View>
+    <Text>Goals: {item.away.goals}</Text>
+    <Text>Shots on goal: {item.away.shotsOnGoal}</Text>
+      </View>
+    </View>
+  )
+}
+
+
+
 
 
   render() {
@@ -53,183 +67,43 @@ export default class GameDetail extends React.Component {
      );
      }
 
-     if(this.state.periods.length === 0){
-       return(
-         <View style={styles.container}>
-         <Image style={{width:250, height: 300, alignSelf: 'center', paddingTop: 15}}
-         source={require('../images/Skelli.png')} />
-         <Text style={{textAlign: 'center', fontSize: 22, padding: 8}}> Game not played yet </Text>
-         </View>
-       )
-     }
-
-     if (this.state.overTime) {
-      return (
-        <View style={styles.container}>
-
-        <View style={styles.cardTop}>
-        <View>
-          <Text style={styles.teamText}>{this.state.home.teamName}</Text>
-          <Text style={styles.scoreText}>{this.state.homeData.goals}</Text>
-          </View>
-        <View>
-         <Text style={styles.teamText}>{this.state.away.teamName}</Text>
-         <Text style={styles.scoreText}>{this.state.awayData.goals}</Text>
-          </View>
-        </View>
-
-        <View style={styles.cardGame}>
-        <View>
-        <Text>Shots: {this.state.homeData.shots}</Text>
-        <Text>Powerplay goals: {this.state.homeData.powerPlayGoals}</Text>
-        <Text>PenaltyMinutes: {this.state.homeData.pim}</Text>
-        <Text>Blocked: {this.state.homeData.blocked}</Text>
-        <Text>Giveaways: {this.state.homeData.giveaways}</Text>
-        <Text>Hits: {this.state.homeData.hits}</Text>
-        </View>
-        <View>
-        <Text>Shots: {this.state.awayData.shots}</Text>
-        <Text>Powerplay goals: {this.state.awayData.powerPlayGoals}</Text>
-        <Text>PenaltyMinutes: {this.state.awayData.pim}</Text>
-        <Text>Blocked: {this.state.awayData.blocked}</Text>
-        <Text>Giveaways: {this.state.awayData.giveaways}</Text>
-        <Text>Hits: {this.state.awayData.hits}</Text>
-        </View></View>
-
-        <View style={styles.periodOne}>
-        <View>
-        <Text> Goals: {this.state.periods[0].home.goals} </Text>
-        <Text> Shots on Goal: {this.state.periods[0].home.shotsOnGoal} </Text>
-         </View>
-
-         <View><Text style={styles.scoreText}> 1st </Text></View>
-
-        <View>
-        <Text> Goals: {this.state.periods[0].away.goals} </Text>
-        <Text> Shots on Goal: {this.state.periods[0].away.shotsOnGoal} </Text>
-         </View>
-        </View>
-
-        <View style={styles.periodTwo}>
-        <View>
-        <Text> Goals: {this.state.periods[1].home.goals} </Text>
-        <Text> Shots on Goal: {this.state.periods[1].home.shotsOnGoal} </Text>
-         </View>
-
-         <View><Text style={styles.scoreText}> 2nd </Text></View>
-
-        <View>
-        <Text> Goals: {this.state.periods[1].away.goals} </Text>
-        <Text> Shots on Goal: {this.state.periods[1].away.shotsOnGoal} </Text>
-         </View>
-        </View>
-
-        <View style={styles.periodOne}>
-        <View>
-        <Text> Goals: {this.state.periods[2].home.goals} </Text>
-        <Text> Shots on Goal: {this.state.periods[2].home.shotsOnGoal} </Text>
-         </View>
-
-         <View><Text style={styles.scoreText}> 3rd </Text></View>
-
-        <View>
-        <Text> Goals: {this.state.periods[2].away.goals} </Text>
-        <Text> Shots on Goal: {this.state.periods[2].away.shotsOnGoal} </Text>
-        </View>
-       </View>
-
-          <View style={styles.periodTwo}>
-          <View>
-          <Text> Goals: {this.state.periods[3].home.goals} </Text>
-          <Text> Shots on Goal: {this.state.periods[3].home.shotsOnGoal} </Text>
-           </View>
-
-           <View><Text style={styles.scoreText}> OT </Text></View>
-
-          <View>
-          <Text> Goals: {this.state.periods[3].away.goals} </Text>
-          <Text> Shots on Goal: {this.state.periods[3].away.shotsOnGoal} </Text>
-           </View>
-          </View>
-
-        </View>
-      );
-      }
     return (
-
-
       <View style={styles.container}>
 
       <View style={styles.cardTop}>
-      <View>
-        <Text style={styles.teamText}>{this.state.home.teamName}</Text>
-        <Text style={styles.scoreText}>{this.state.homeData.goals}</Text>
+       <View>
+         <Text style={styles.teamText}>{this.state.home.teamName}</Text>
+         <Text style={styles.scoreText}>{this.state.homeData.goals}</Text>
+         </View>
+       <View>
+        <Text style={styles.teamText}>{this.state.away.teamName}</Text>
+        <Text style={styles.scoreText}>{this.state.awayData.goals}</Text>
+         </View>
+       </View>
+
+       <View style={styles.cardGame}>
+               <View>
+               <Text>Shots: {this.state.homeData.shots}</Text>
+               <Text>Powerplay goals: {this.state.homeData.powerPlayGoals}</Text>
+               <Text>PenaltyMinutes: {this.state.homeData.pim}</Text>
+               <Text>Blocked: {this.state.homeData.blocked}</Text>
+               <Text>Giveaways: {this.state.homeData.giveaways}</Text>
+               <Text>Hits: {this.state.homeData.hits}</Text>
+               </View>
+               <View>
+               <Text>Shots: {this.state.awayData.shots}</Text>
+               <Text>Powerplay goals: {this.state.awayData.powerPlayGoals}</Text>
+               <Text>PenaltyMinutes: {this.state.awayData.pim}</Text>
+               <Text>Blocked: {this.state.awayData.blocked}</Text>
+               <Text>Giveaways: {this.state.awayData.giveaways}</Text>
+               <Text>Hits: {this.state.awayData.hits}</Text>
+               </View></View>
+
+        <View>
+        <FlatList data={this.state.periods}
+        keyExtractor={item => item.num}
+        renderItem={this._renderItem} />
         </View>
-      <View>
-       <Text style={styles.teamText}>{this.state.away.teamName}</Text>
-       <Text style={styles.scoreText}>{this.state.awayData.goals}</Text>
-        </View>
-      </View>
-
-      <View style={styles.cardGame}>
-      <View>
-      <Text>Shots: {this.state.homeData.shots}</Text>
-      <Text>Powerplay goals: {this.state.homeData.powerPlayGoals}</Text>
-      <Text>PenaltyMinutes: {this.state.homeData.pim}</Text>
-      <Text>Blocked: {this.state.homeData.blocked}</Text>
-      <Text>Giveaways: {this.state.homeData.giveaways}</Text>
-      <Text>Hits: {this.state.homeData.hits}</Text>
-      </View>
-      <View>
-      <Text>Shots: {this.state.awayData.shots}</Text>
-      <Text>Powerplay goals: {this.state.awayData.powerPlayGoals}</Text>
-      <Text>PenaltyMinutes: {this.state.awayData.pim}</Text>
-      <Text>Blocked: {this.state.awayData.blocked}</Text>
-      <Text>Giveaways: {this.state.awayData.giveaways}</Text>
-      <Text>Hits: {this.state.awayData.hits}</Text>
-      </View></View>
-
-      <View style={styles.periodOne}>
-      <View>
-      <Text> Goals: {this.state.periods[0].home.goals} </Text>
-      <Text> Shots on Goal: {this.state.periods[0].home.shotsOnGoal} </Text>
-       </View>
-
-       <View><Text style={styles.scoreText}> 1st </Text></View>
-
-      <View>
-      <Text> Goals: {this.state.periods[0].away.goals} </Text>
-      <Text> Shots on Goal: {this.state.periods[0].away.shotsOnGoal} </Text>
-       </View>
-      </View>
-
-      <View style={styles.periodTwo}>
-      <View>
-      <Text> Goals: {this.state.periods[1].home.goals} </Text>
-      <Text> Shots on Goal: {this.state.periods[1].home.shotsOnGoal} </Text>
-       </View>
-
-       <View><Text style={styles.scoreText}> 2nd </Text></View>
-
-      <View>
-      <Text> Goals: {this.state.periods[1].away.goals} </Text>
-      <Text> Shots on Goal: {this.state.periods[1].away.shotsOnGoal} </Text>
-       </View>
-      </View>
-
-      <View style={styles.periodOne}>
-      <View>
-      <Text> Goals: {this.state.periods[2].home.goals} </Text>
-      <Text> Shots on Goal: {this.state.periods[2].home.shotsOnGoal} </Text>
-       </View>
-
-       <View><Text style={styles.scoreText}> 3rd </Text></View>
-
-      <View>
-      <Text> Goals: {this.state.periods[2].away.goals} </Text>
-      <Text> Shots on Goal: {this.state.periods[2].away.shotsOnGoal} </Text>
-      </View>
-     </View>
 
       </View>
     );
@@ -265,20 +139,6 @@ const styles = StyleSheet.create({
    justifyContent: 'space-between',
    padding: 5
  },
- periodOne: {
-   backgroundColor: '#deecfb',
-   flexDirection: 'row',
-   justifyContent: 'space-between',
-   padding: 5,
- },
-
- periodTwo: {
-   backgroundColor: 'white',
-   flexDirection: 'row',
-   justifyContent: 'space-between',
-   padding: 5,
- },
-
  cardGame: {
    flexDirection: 'row',
    justifyContent: 'space-between',
