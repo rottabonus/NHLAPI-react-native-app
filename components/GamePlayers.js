@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, Alert, FlatList, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Alert, FlatList, Image } from 'react-native';
 import { Header, Button } from 'react-native-elements';
 
 export default class GamePlayers extends React.Component {
@@ -28,15 +28,24 @@ export default class GamePlayers extends React.Component {
                 });
     }
 
+    _renderItem = data => {
+      const item = data.item;
+      return(
+        <View>
+        <Text>{item.person.fullName}</Text>
+        </View>
+      )
+    }
+
 
 
 
   render() {
     if (this.state.isLoading) {
      return (
-       <View style={{ flex: 1, paddingTop: 20 }}>
-         <ActivityIndicator />
-         <Text> Loading.... Ba dim ba dimb ba duu! </Text>
+       <View style={styles.container}>
+         <Image style={{width:170, height: 170, alignSelf: 'center'}} source={require('../images/skatingSkelli.gif')} />
+         <Text> Loading.... Ba dim ba dimb duu! </Text>
        </View>
      );
      }
@@ -58,8 +67,10 @@ export default class GamePlayers extends React.Component {
 
         <View style={styles.cardBot}>
         <View>
-        <Text> LOL </Text>
-         </View>
+        <FlatList data={this.state.home}
+        keyExtractor={item => item.person.id}
+        renderItem={this._renderItem} />
+        </View>
         <View>
         <Text> Lol2 </Text>
          </View>

@@ -29,10 +29,11 @@ showHelp = () => {
         <View style={styles.header}>
 
                 <Header placement="left"
-                leftComponent={{ icon: 'menu', color: '#fff',
+                backgroundColor={'#cf5807'}
+                leftComponent={{ icon: 'menu', color: '#ffff',
                 onPress: () => this.props.navigation.navigate('DrawerOpen')}}
-                centerComponent={{ text: 'Frontpage', style: { color: '#fff' } }}
-                rightComponent={{ icon: 'home', color: '#fff',
+                centerComponent={{ text: 'Frontpage', style: { color: '#ffff' } }}
+                rightComponent={{ icon: 'home', color: '#ffff',
                  onPress: () => this.props.navigation.navigate('Frontpage')}}/>
 
       <View style={styles.container}>
@@ -82,7 +83,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#7ab3ef',
+    color: '#ff4000',
     paddingTop: 30
   },
 

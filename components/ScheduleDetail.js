@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, ActivityIndicator, FlatList, Alert } from 'react-native';
+import { StyleSheet, Text, View, Image, FlatList, Alert } from 'react-native';
 import { List, ListItem } from "react-native-elements";
 
 
@@ -38,9 +38,9 @@ export default class ScheduleDetail extends React.Component {
   render() {
       if (this.state.isLoading) {
       return (
-        <View style={{ flex: 1, paddingTop: 20 }}>
-          <ActivityIndicator />
-          <Text> Loading.... Ba dim ba dimb ba duu! </Text>
+        <View style={styles.container}>
+          <Image style={{width:170, height: 170, alignSelf: 'center'}} source={require('../images/skatingSkelli.gif')} />
+          <Text> Loading.... Ba dim ba dimb duu! </Text>
         </View>
       );
       }

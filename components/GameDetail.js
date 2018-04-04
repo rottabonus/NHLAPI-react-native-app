@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, Alert, FlatList, ActivityIndicator, Image } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Alert, FlatList, Image } from 'react-native';
 import { Header, Button } from 'react-native-elements';
 
 export default class GameDetail extends React.Component {
@@ -60,9 +60,9 @@ _renderItem = data => {
   render() {
     if (this.state.isLoading) {
      return (
-       <View style={{ flex: 1, paddingTop: 20 }}>
-         <ActivityIndicator />
-         <Text> Loading.... Ba dim ba dimb ba duu! </Text>
+       <View style={styles.container}>
+         <Image style={{width:170, height: 170, alignSelf: 'center'}} source={require('../images/skatingSkelli.gif')} />
+         <Text> Loading.... Ba dim ba dimb duu! </Text>
        </View>
      );
      }

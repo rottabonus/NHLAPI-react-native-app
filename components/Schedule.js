@@ -83,19 +83,20 @@ getParsedDate = () => {
     return (
         <View style={styles.header}>
 
-                <Header placement="left"
-                leftComponent={{ icon: 'menu', color: '#fff',
-                onPress: () => this.props.navigation.navigate('DrawerOpen')}}
-                centerComponent={{ text: 'Games', style: { color: '#fff' } }}
-                rightComponent={{ icon: 'home', color: '#fff',
-                 onPress: () => this.props.navigation.navigate('Frontpage')}}/>
+        <Header placement="left"
+        backgroundColor={'#cf5807'}
+        leftComponent={{ icon: 'menu', color: '#ffff',
+        onPress: () => this.props.navigation.navigate('DrawerOpen')}}
+        centerComponent={{ text: 'Games', style: { color: '#ffff' } }}
+        rightComponent={{ icon: 'home', color: '#ffff',
+         onPress: () => this.props.navigation.navigate('Frontpage')}}/>
 
         <View style={styles.container}>
         <TextInput style={styles.input} placeholder='Date YYYY-MM-DD' onChangeText={(newdate) => this.setState({newdate})} value={this.state.newdate} />
         <View style={styles.buttons}><View>
-        <Button onPress={this.getScheduleDate} title="Search by Date"/>
+        <Button buttonStyle={{backgroundColor: '#ff751a'}} onPress={this.getScheduleDate} title="Search by Date"/>
         </View><View>
-        <Button onPress={this.getYesterday} title="Yesterdays games"/>
+        <Button buttonStyle={{backgroundColor: '#ff751a'}} onPress={this.getYesterday} title="Yesterdays games"/>
         </View></View>
         <View>
         <Text style={styles.text}>Schedule for {this.state.renderdate}</Text>

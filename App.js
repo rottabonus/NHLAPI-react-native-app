@@ -29,11 +29,12 @@ const TabGame = TabNavigator({
 }, {
     tabBarPosition: 'bottom',
     animationEnabled: true,
-    style: {
-      backgroundColor: 'gray'
-    }
-}
-);
+    tabBarOptions: {
+        style: {
+            backgroundColor: '#cf5807'
+          }
+        }
+      });
 
 const TabTeam = TabNavigator({
   Players: {screen: StandingDetail},
@@ -41,11 +42,12 @@ const TabTeam = TabNavigator({
 }, {
     tabBarPosition: 'bottom',
     animationEnabled: true,
-    style: {
-      backgroundColor: 'gray'
-    }
-}
-);
+    tabBarOptions: {
+        style: {
+            backgroundColor: '#cf5807'
+          }
+        }
+      });
 
 
 
@@ -55,11 +57,12 @@ const TabStandings = TabNavigator({
     }, {
         tabBarPosition: 'bottom',
         animationEnabled: true,
-        style: {
-          backgroundColor: 'gray'
-        }
-    }
-    );
+        tabBarOptions: {
+            style: {
+                backgroundColor: '#cf5807'
+              }
+            }
+          });
 
 const  TabFront = TabNavigator({
       Frontpage: {screen: Front},
@@ -67,11 +70,12 @@ const  TabFront = TabNavigator({
     }, {
         tabBarPosition: 'bottom',
         animationEnabled: true,
-        style: {
-          backgroundColor: 'gray'
-        }
-    }
-    );
+        tabBarOptions: {
+            style: {
+                backgroundColor: '#cf5807'
+              }
+            }
+          });
 
 const StackFront = StackNavigator({
         Front: {screen: TabFront},
@@ -103,6 +107,15 @@ const DrawerNavigation = DrawerNavigator({
           Games: {screen: StackSchedule},
          Standings: {screen: StackStanding},
          Search: {screen: StackSearch},
-
-
-        })
+       }, {
+         contentOptions: {
+           activeTintColor: '#ff531a',
+           itemsContainerStyle: {
+             paddingTop: 70
+           },
+         labelStyle: {
+           fontSize: 30,
+           padding: 15,
+         }
+       }
+     })

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Alert, FlatList, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, Alert, FlatList, Image } from 'react-native';
 
 export default class TeamDetail extends React.Component {
     static navigationOptions = {title: 'Team'};
@@ -56,9 +56,9 @@ export default class TeamDetail extends React.Component {
     const { id } = this.props.navigation.state.params;
     if (this.state.isLoading) {
     return (
-      <View style={{ flex: 1, paddingTop: 20 }}>
-        <ActivityIndicator />
-        <Text> Loading.... Ba dim ba dimb ba duu! </Text>
+      <View style={styles.container}>
+        <Image style={{width:170, height: 170, alignSelf: 'center'}} source={require('../images/skatingSkelli.gif')} />
+        <Text> Loading.... Ba dim ba dimb duu! </Text>
       </View>
     );
     }
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     margin: 10
   },
   statBoxOne: {
-  backgroundColor: '#deecfb',
+  backgroundColor: '#ffa366',
   padding: 5,
   marginLeft: 10,
   marginRight: 10,

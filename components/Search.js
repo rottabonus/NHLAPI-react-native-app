@@ -157,18 +157,19 @@ findPlayerFour = () => {
     return (
         <View style={styles.header}>
 
-                <Header placement="left"
-                leftComponent={{ icon: 'menu', color: '#fff',
-                onPress: () => this.props.navigation.navigate('DrawerOpen')}}
-                centerComponent={{ text: 'Search', style: { color: '#fff' } }}
-                rightComponent={{ icon: 'home', color: '#fff',
-                 onPress: () => this.props.navigation.navigate('Frontpage')}}/>
+        <Header placement="left"
+        backgroundColor={'#cf5807'}
+        leftComponent={{ icon: 'menu', color: '#ffff',
+        onPress: () => this.props.navigation.navigate('DrawerOpen')}}
+        centerComponent={{ text: 'Search', style: { color: '#ffff' } }}
+        rightComponent={{ icon: 'home', color: '#ffff',
+         onPress: () => this.props.navigation.navigate('Frontpage')}}/>
 
       <View style={styles.container}>
         <Text>Searchpage</Text>
 
         <TextInput style={styles.input} placeholder='i.e. Patrik Laine' onChangeText={(search) => this.setState({search})} value={this.state.search} />
-        <Button onPress={this.startSearch} title="Get Player By Name"/>
+        <Button buttonStyle={{backgroundColor: '#ff751a'}} onPress={this.startSearch} title="Get Player By Name"/>
       </View></View>
     );
   }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Alert, Image, ActivityIndicator, FlatList, Picker } from 'react-native';
+import { StyleSheet, Text, View, Alert, Image, FlatList, Picker } from 'react-native';
 import { Button } from 'react-native-elements';
 
 
@@ -63,8 +63,8 @@ export default class Player extends React.Component {
      const { person } = this.props.navigation.state.params
      if (this.state.isLoading) {
       return (
-        <View style={{ flex: 1, paddingTop: 20 }}>
-          <ActivityIndicator />
+        <View style={styles.container}>
+          <Image style={{width:170, height: 170, alignSelf: 'center'}} source={require('../images/skatingSkelli.gif')} />
           <Text> Loading.... Ba dim ba dimb duu! </Text>
         </View>
       );
@@ -92,8 +92,8 @@ export default class Player extends React.Component {
 
         <View style={styles.cardTop}>
         <View>
-        <Image style={{width:150, height: 300, marginLeft: '10%'}}
-        source={require('../images/Skelli.png')} />
+        <Image style={{width:200, height: 150, marginLeft: '10%'}}
+        source={require('../images/leanSkelli.png')} />
         </View>
         <View>
         <Text> No games on NHL </Text>

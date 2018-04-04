@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList, TextInput, Alert, ActivityIndicator} from 'react-native';
+import { StyleSheet, Text, View, FlatList, TextInput, Alert, Image} from 'react-native';
 import { List, ListItem, Button, Header } from "react-native-elements";
 import { SQLite } from 'expo';
 
@@ -52,6 +52,8 @@ export default class StandingsLeague extends React.Component {
         rightTitle={`${item.gamesPlayed} ${item.leagueRecord.wins} ${item.leagueRecord.losses} ${item.leagueRecord.ot} ${item.points} `}
         rightTitleContainerStyle={{alignItems: 'flex-end', flex: 1}}
         titleContainerStyle={{flex: 1, alignItems: 'flex-start'}}
+        onPress={() => this.getTeam(item)}
+        onLongPress={() => this.saveTeam(item.team.name, item.team.id)}
         />
 
     )
@@ -60,8 +62,8 @@ export default class StandingsLeague extends React.Component {
   render() {
       if (this.state.isLoading) {
       return (
-        <View style={{ flex: 1, paddingTop: 20 }}>
-          <ActivityIndicator />
+        <View style={styles.container}>
+          <Image style={{width:170, height: 170, alignSelf: 'center'}} source={require('../images/skatingSkelli.gif')} />
           <Text> Loading.... Ba dim ba dimb duu! </Text>
         </View>
       );
@@ -69,12 +71,13 @@ export default class StandingsLeague extends React.Component {
     return (
         <View style={styles.header}>
 
-                <Header placement="left"
-                leftComponent={{ icon: 'menu', color: '#fff',
-                onPress: () => this.props.navigation.navigate('DrawerOpen')}}
-                centerComponent={{ text: 'League', style: { color: '#fff' } }}
-                rightComponent={{ icon: 'home', color: '#fff',
-                 onPress: () => this.props.navigation.navigate('Frontpage')}}/>
+        <Header placement="left"
+        backgroundColor={'#cf5807'}
+        leftComponent={{ icon: 'menu', color: '#ffff',
+        onPress: () => this.props.navigation.navigate('DrawerOpen')}}
+        centerComponent={{ text: 'League', style: { color: '#ffff' } }}
+        rightComponent={{ icon: 'home', color: '#ffff',
+         onPress: () => this.props.navigation.navigate('Frontpage')}}/>
 
       <View style={styles.container}>
 
@@ -87,8 +90,6 @@ export default class StandingsLeague extends React.Component {
         data={this.state.standings}
         keyExtractor={item => item.team.id}
         renderItem={this._renderItem}
-        onPress={() => this.getTeam(item)}
-        onLongPress={() => this.saveTeam(item.team.name, item.team.id)}
         />
         </List>
         </View>

@@ -51,6 +51,7 @@ deleteTeam = (id) => {
         <View style={styles.header}>
 
                 <Header placement="left"
+                backgroundColor={'#cf5807'}
                 leftComponent={{ icon: 'menu', color: '#fff',
                 onPress: () => this.props.navigation.navigate('DrawerOpen')}}
                 centerComponent={{ text: 'Favourites', style: { color: '#fff' } }}
