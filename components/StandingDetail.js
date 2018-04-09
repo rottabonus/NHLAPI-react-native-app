@@ -87,7 +87,7 @@ export default class StandingDetail extends React.Component {
       return (
         <View style={styles.container}>
           <Image style={{width:170, height: 170, alignSelf: 'center'}} source={require('../images/skatingSkelli.gif')} />
-          <Text> Loading.... Ba dim ba dimb duu! </Text>
+          <Text style={{fontFamily: 'montserrat-sb'}}> Loading....</Text>
         </View>
       );
       }
@@ -103,7 +103,9 @@ export default class StandingDetail extends React.Component {
         keyExtractor={item => item.person.id}
         renderItem={({item}) => <ListItem
         title={`${item.person.fullName} # ${item.jerseyNumber}`}
+        titleStyle={{fontFamily: 'montserrat-regular'}}
         subtitle={item.position.name}
+        subtitleStyle={{fontFamily: 'montserrat-regular'}}
         avatar={{uri: 'https://nhl.bamcontent.com/images/headshots/current/168x168/'+item.person.id+'.jpg'}}
         onPress={() => this.getPlayerDetails(item)}
 
@@ -121,13 +123,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-      paddingTop: 30,
+      paddingTop: 20,
       paddingBottom: 30,
       borderColor: 'gray',
       margin: 20
   },
     text: {
-        textAlign: 'center'
+      fontFamily: 'montserrat-black',
+      textAlign: 'center',
+      fontSize: 26,
+      color: '#ff4000',
 
     }
 

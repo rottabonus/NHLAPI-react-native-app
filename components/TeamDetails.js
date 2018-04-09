@@ -58,7 +58,7 @@ export default class TeamDetail extends React.Component {
     return (
       <View style={styles.container}>
         <Image style={{width:170, height: 170, alignSelf: 'center'}} source={require('../images/skatingSkelli.gif')} />
-        <Text> Loading.... Ba dim ba dimb duu! </Text>
+        <Text style={{fontFamily: 'montserrat-sb'}}> Loading....</Text>
       </View>
     );
     }
@@ -116,10 +116,11 @@ const styles = StyleSheet.create({
       paddingBottom: 50
   },
   teamText: {
-    fontSize: 28,
-    fontWeight: 'bold',
+    fontFamily: 'montserrat-black',
     textAlign: 'center',
-    margin: 10
+    fontSize: 25,
+    color: '#ff4000',
+    padding: 10
   },
   statBoxOne: {
   backgroundColor: '#ffa366',

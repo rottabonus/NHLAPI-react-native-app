@@ -74,20 +74,22 @@ const styles = StyleSheet.create({
     },
 
   frontText: {
+      fontFamily: 'montserrat-sb',
       textAlign: 'center',
       fontSize: 16,
       padding: 15
   },
 
   welcome: {
+    fontFamily: 'montserrat-black',
     textAlign: 'center',
     fontSize: 20,
-    fontWeight: 'bold',
     color: '#ff4000',
     paddingTop: 30
   },
 
   featureText: {
+    fontFamily: 'montserrat-sb',
     textAlign: 'center',
     fontSize: 14,
     padding: 5

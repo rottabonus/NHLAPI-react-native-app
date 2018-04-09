@@ -31,7 +31,6 @@ export default class Player extends React.Component {
             this.setState({
                 isGoalie: true
             });
-            Alert.alert("is a goalie");
         }
     }
 
@@ -65,7 +64,7 @@ export default class Player extends React.Component {
       return (
         <View style={styles.container}>
           <Image style={{width:170, height: 170, alignSelf: 'center'}} source={require('../images/skatingSkelli.gif')} />
-          <Text> Loading.... Ba dim ba dimb duu! </Text>
+          <Text style={{fontFamily: 'montserrat-sb'}}> Loading....</Text>
         </View>
       );
       }
@@ -227,13 +226,15 @@ const styles = StyleSheet.create({
   },
     text: {
         marginLeft: '5%',
-        paddingTop: 35
+        paddingTop: 35,
+
     },
     cardTop: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+
     },
      stats: {
-         marginLeft: '5%',
+         marginLeft: '2%',
         padding: 10
      },
     image: {

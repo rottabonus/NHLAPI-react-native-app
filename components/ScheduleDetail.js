@@ -40,7 +40,7 @@ export default class ScheduleDetail extends React.Component {
       return (
         <View style={styles.container}>
           <Image style={{width:170, height: 170, alignSelf: 'center'}} source={require('../images/skatingSkelli.gif')} />
-          <Text> Loading.... Ba dim ba dimb duu! </Text>
+          <Text style={{fontFamily: 'montserrat-sb'}}> Loading....</Text>
         </View>
       );
       }
@@ -56,6 +56,7 @@ export default class ScheduleDetail extends React.Component {
         keyExtractor={item => item.id}
         renderItem={({item}) => <ListItem
         title={item.title}
+        titleStyle={{fontFamily: 'montserrat-regular', fontSize: 12}}
         subtitle={item.duration}
          onPress={() => this.getHighlightVideo(item)}
         />}/>
@@ -76,7 +77,11 @@ const styles = StyleSheet.create({
       margin: 20
   },
     text: {
-        textAlign: 'center'
+      fontFamily: 'montserrat-black',
+      textAlign: 'center',
+      fontSize: 20,
+      color: '#ff4000',
+      paddingTop: 10
 
     }
 });

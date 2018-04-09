@@ -49,7 +49,9 @@ export default class StandingsLeague extends React.Component {
       <ListItem
         hideChevron={true}
         title={item.team.name}
+        titleStyle={{fontFamily: 'montserrat-regular', fontSize: 11}}
         rightTitle={`${item.gamesPlayed} ${item.leagueRecord.wins} ${item.leagueRecord.losses} ${item.leagueRecord.ot} ${item.points} `}
+        rightTitleStyle={{fontFamily: 'montserrat-regular', fontSize: 12}}
         rightTitleContainerStyle={{alignItems: 'flex-end', flex: 1}}
         titleContainerStyle={{flex: 1, alignItems: 'flex-start'}}
         onPress={() => this.getTeam(item)}
@@ -64,7 +66,7 @@ export default class StandingsLeague extends React.Component {
       return (
         <View style={styles.container}>
           <Image style={{width:170, height: 170, alignSelf: 'center'}} source={require('../images/skatingSkelli.gif')} />
-          <Text> Loading.... Ba dim ba dimb duu! </Text>
+          <Text style={{fontFamily: 'montserrat-sb'}}> Loading....</Text>
         </View>
       );
       }
@@ -81,7 +83,7 @@ export default class StandingsLeague extends React.Component {
 
       <View style={styles.container}>
 
-      <View style={{alignSelf: 'flex-end', paddingTop: 20, marginRight: '5%'}}><Text>GP  W   L   OT  P</Text></View>
+      <View style={{alignSelf: 'flex-end', paddingTop: 20, marginRight: '5%'}}><Text style={styles.column}>GP  W   L   OT  P</Text></View>
 
         <View>
         </View>
@@ -117,5 +119,10 @@ const styles = StyleSheet.create({
     },
     header: {
         flex: 1
+    },
+
+    column: {
+      fontFamily: 'montserrat-sb',
+      fontSize: 10
     }
 });

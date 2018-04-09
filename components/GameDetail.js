@@ -62,7 +62,7 @@ _renderItem = data => {
      return (
        <View style={styles.container}>
          <Image style={{width:170, height: 170, alignSelf: 'center'}} source={require('../images/skatingSkelli.gif')} />
-         <Text> Loading.... Ba dim ba dimb duu! </Text>
+         <Text style={{fontFamily: 'montserrat-sb'}}> Loading....</Text>
        </View>
      );
      }
@@ -126,13 +126,16 @@ const styles = StyleSheet.create({
         padding: 5
  },
  teamText: {
-   fontSize: 30,
-   fontWeight: 'bold'
+   fontFamily: 'montserrat-black',
+   textAlign: 'center',
+   fontSize: 25,
+   color: '#ff4000',
  },
 
  scoreText: {
    fontSize: 22,
-   textAlign: 'center'
+   textAlign: 'center',
+   fontWeight: 'bold'
  },
  cardBot: {
    flexDirection: 'row',

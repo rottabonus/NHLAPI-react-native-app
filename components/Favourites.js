@@ -42,8 +42,8 @@ deleteTeam = (id) => {
       return(
         <View style={styles.containerNoFav}>
         <Image style={{width:250, height: 300, alignSelf: 'center'}}
-        source={require('../images/Skelli.png')} />
-        <Text style={{textAlign: 'center', fontSize: 22, padding: 8}}> No Favourites </Text>
+        source={require('../images/leanSkelli.png')} />
+        <Text style={{textAlign: 'center', fontSize: 22, padding: 8, fontFamily: 'montserrat-black'}}> No Favourites </Text>
         </View>
       )
     }
@@ -59,8 +59,8 @@ deleteTeam = (id) => {
                  onPress: () => this.props.navigation.navigate('Frontpage')}}/>
 
       <View style={styles.container}>
-        <Text style={styles.text}> Your Favourite Teams </Text>
-        <Text>Press once to see details and long to remove</Text>
+        <Text style={styles.heading}> Your Favourite Teams </Text>
+        <Text style={styles.text}>Press once to see details and long to remove</Text>
 
         <List>
         <FlatList
@@ -68,6 +68,7 @@ deleteTeam = (id) => {
             keyExtractor={item => item.listid}
             renderItem={({item}) => <ListItem
             title={item.name}
+            titleStyle={{fontFamily: 'montserrat-regular'}}
             onPress={() => this.getTeam(item)}
             onLongPress={() => this.deleteTeam(item.listid)}/>}/>
       </List>
@@ -89,8 +90,17 @@ const styles = StyleSheet.create({
         flex: 1
     },
   text: {
+    fontFamily: 'montserrat-sb',
         textAlign: 'center',
         fontSize: 22
+  },
+
+  heading: {
+    fontFamily: 'montserrat-black',
+    textAlign: 'center',
+    fontSize: 20,
+    color: '#ff4000',
+    paddingTop: 30
   },
 
   containerNoFav: {

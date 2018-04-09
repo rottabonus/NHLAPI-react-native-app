@@ -8,7 +8,7 @@ export default class Schedule extends React.Component {
     static navigationOptions = {header: null};
     constructor(props){
         super(props);
-        this.state = {schedule: [], renderdate: '', newdate: '', yesterday: ''};
+        this.state = {schedule: [], renderdate: '', newdate: '', yesterday: '', games: true};
     }
 
     componentWillMount(){
@@ -35,9 +35,13 @@ getParsedDate = () => {
         fetch(url)
         .then(response => response.json())
         .then(responseJson => {
+          if(responseJson.length === 1){
             this.setState({ schedule: responseJson.dates[0].games,
-                          renderdate: responseJson.dates[0].date});
-       })
+                          renderdate: responseJson.dates[0].date,
+                          games: true});
+       } else {
+         this.setState({games: false})
+       }})
                 .catch((error) => {
                   Alert.alert(error);
                 });
@@ -52,7 +56,8 @@ getParsedDate = () => {
             for(i=0; i<responseJson.dates.length; i++){
             if(testDate == responseJson.dates[i].date) {
             this.setState({ schedule: responseJson.dates[i].games,
-                          renderdate: responseJson.dates[i].date});
+                          renderdate: responseJson.dates[i].date,
+                          games: true});
        }}})
                 .catch((error) => {
                   Alert.alert(error);
@@ -64,9 +69,14 @@ getParsedDate = () => {
         fetch(url)
         .then(response => response.json())
         .then(responseJson => {
+          if(responseJson.length === 1){
             this.setState({ schedule: responseJson.dates[0].games,
-                          renderdate: this.state.yesterday});
-       })
+                          renderdate: this.state.yesterday,
+                          games: true});
+       } else {
+         this.setState({games: false})
+       }})
+
                 .catch((error) => {
                   Alert.alert(error);
                 });
@@ -101,16 +111,22 @@ getParsedDate = () => {
         <View>
         <Text style={styles.text}>Schedule for {this.state.renderdate}</Text>
         </View>
+
+        {
+        this.state.games ?
         <List>
         <FlatList
         data={this.state.schedule}
         keyExtractor={item => item.gamePk}
         renderItem={({item}) => <ListItem
         title={`${item.teams.home.team.name} - ${item.teams.away.team.name}`}
+        titleStyle={{fontFamily: 'montserrat-regular', fontSize: 12}}
         subtitle={`${item.venue.name} ${item.teams.home.score} - ${item.teams.away.score}`}
+        subtitleStyle={{fontFamily: 'montserrat-regular', fontSize: 12}}
         onPress={() => this.getMatch(item)}
         />}/>
-        </List>
+        </List> : <Text style={styles.textGame}> No games on selected date! </Text>
+      }
         </View>
         </View>
     );
@@ -129,7 +145,12 @@ const styles = StyleSheet.create({
         flex: 1
     },
 text: {
-        textAlign: 'center'
+  fontFamily: 'montserrat-black',
+  textAlign: 'center',
+  fontSize: 20,
+  color: '#ff4000',
+  paddingTop: 5
+
 },
 input: {
         width: 280,
@@ -143,6 +164,13 @@ input: {
 
 buttons: {
   flexDirection: 'row'
+},
+
+textGame: {
+  fontFamily: 'montserrat-sb',
+  textAlign: 'center',
+  fontSize: 20,
+  paddingTop: 5
 }
 
 });

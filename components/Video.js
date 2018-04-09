@@ -10,18 +10,18 @@ export default class HighlightVideo extends React.Component {
         super(props);
         this.state = {mute: false, shouldPlay: true};
     }
-    
-    
-    
-    handlePlayAndPause = () => {  
+
+
+
+    handlePlayAndPause = () => {
     this.setState((prevState) => ({
-       shouldPlay: !prevState.shouldPlay  
+       shouldPlay: !prevState.shouldPlay
     }));
   }
-    
+
      handleVolume = () => {
     this.setState(prevState => ({
-      mute: !prevState.mute,  
+      mute: !prevState.mute,
     }));
   }
 
@@ -30,7 +30,7 @@ export default class HighlightVideo extends React.Component {
       const { description, playbacks } = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
-        <Text>{description}</Text>
+        <Text style={styles.description}>{description}</Text>
     <View><Video
   source={{uri: playbacks[7].url}}
   rate={1.0}
@@ -41,15 +41,15 @@ export default class HighlightVideo extends React.Component {
   isLooping
   style={{ width: 400, height: 224 }}
 /><View style={styles.controlBar}>
-            <MaterialIcons 
+            <MaterialIcons
               name={this.state.mute ? "volume-mute" : "volume-up"}
-              size={40} 
-              color="white" 
+              size={40}
+              color="white"
               onPress={this.handleVolume} />
-            <MaterialIcons 
-              name={this.state.shouldPlay ? "pause" : "play-arrow"} 
-              size={40} 
-              color="white" 
+            <MaterialIcons
+              name={this.state.shouldPlay ? "pause" : "play-arrow"}
+              size={40}
+              color="white"
               onPress={this.handlePlayAndPause} />
         </View>
         </View>
@@ -75,6 +75,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: "rgba(0, 0, 0, 0.5)",
-	}
-    
+	},
+
+  description: {
+    fontFamily: 'montserrat-sb'
+  }
+
 });

@@ -130,7 +130,7 @@ findPlayerFour = () => {
       return (
         <View style={{ flex: 1, paddingTop: 20 }}>
           <ActivityIndicator />
-          <Text> Loading.... Ba dim ba dimb ba duu! </Text>
+          <Text style={{fontFamily: 'montserrat-sb'}}> Loading....</Text>
         </View>
       );
     }
@@ -138,20 +138,22 @@ findPlayerFour = () => {
           return(
               <View style={styles.header}>
 
-                <Header placement="left"
-                leftComponent={{ icon: 'menu', color: '#fff',
-                onPress: () => this.props.navigation.navigate('DrawerOpen')}}
-                centerComponent={{ text: 'Search', style: { color: '#fff' } }}
-                rightComponent={{ icon: 'home', color: '#fff',
-                 onPress: () => this.props.navigation.navigate('Frontpage')}}/>
+              <Header placement="left"
+              backgroundColor={'#cf5807'}
+              leftComponent={{ icon: 'menu', color: '#ffff',
+              onPress: () => this.props.navigation.navigate('DrawerOpen')}}
+              centerComponent={{ text: 'Search', style: { color: '#ffff' } }}
+              rightComponent={{ icon: 'home', color: '#ffff',
+               onPress: () => this.props.navigation.navigate('Frontpage')}}/>
 
                  <View style={styles.container}>
-        <Text>FoundPlayer</Text>
+        <Text style={styles.headerText}>FoundPlayer</Text>
 
         <TextInput style={styles.input} placeholder='i.e. Patrik Laine' onChangeText={(search) => this.setState({search})} value={this.state.search} />
-        <Button onPress={this.startSearch} title="Get Player By Name"/>
-        <Button style={{paddingTop: 20}} onPress={() => this.props.navigation.navigate('Player', {person: this.state.player})} title="Player Details"/>
-      </View></View>
+        <View style={styles.buttons}>
+        <Button buttonStyle={{backgroundColor: '#ff751a'}} onPress={this.startSearch} title="Get Player By Name"/>
+        <Button buttonStyle={{backgroundColor: '#ff751a'}} onPress={() => this.props.navigation.navigate('Player', {person: this.state.player})} title="Player Details"/>
+      </View></View></View>
           );
       }
     return (
@@ -166,7 +168,7 @@ findPlayerFour = () => {
          onPress: () => this.props.navigation.navigate('Frontpage')}}/>
 
       <View style={styles.container}>
-        <Text>Searchpage</Text>
+        <Text style={styles.headerText}>Searchpage</Text>
 
         <TextInput style={styles.input} placeholder='i.e. Patrik Laine' onChangeText={(search) => this.setState({search})} value={this.state.search} />
         <Button buttonStyle={{backgroundColor: '#ff751a'}} onPress={this.startSearch} title="Get Player By Name"/>
@@ -195,5 +197,17 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         textAlign: 'center'
 },
+
+headerText: {
+  fontFamily: 'montserrat-black',
+  textAlign: 'center',
+  fontSize: 20,
+  color: '#ff4000',
+  paddingTop: 30
+},
+
+buttons: {
+  justifyContent: 'space-around'
+}
 
 });

@@ -1,5 +1,6 @@
 import React from 'react';
 import { DrawerNavigator, StackNavigator, TabNavigator} from 'react-navigation';
+import { Image, View, Text } from 'react-native';
 import Front from './components/Front';
 import Standings from './components/Standings';
 import Schedule from './components/Schedule';
@@ -9,13 +10,45 @@ import HighlightVideo from './components/Video';
 import Player from './components/Player';
 import Search from './components/Search';
 import GameDetail from './components/GameDetail';
-import GamePlayers from './components/GamePlayers';
 import TeamDetail from './components/TeamDetails';
 import StandingsLeague from './components/StandingsLeague';
 import Favourites from './components/Favourites';
+import TeamSchedule from './components/TeamSchedule';
+import { Font } from 'expo';
 
 export default class App extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = ({
+      fontLoaded: false
+    })
+  }
+
+componentDidMount() {
+  this.loadAssetAsync();
+}
+
+async loadAssetAsync() {
+        await Expo.Font.loadAsync({
+         'montserrat-black': require('./assets/fonts/MontserratBlack.ttf'),
+         'montserrat-medium': require('./assets/fonts/Montserrat-Medium.ttf'),
+         'montserrat-sb': require('./assets/fonts/Montserrat-SemiBold.ttf'),
+         'montserrat-regular': require('./assets/fonts/Montserrat-Regular.ttf'),
+        });;
+
+        this.setState({ fontLoaded: true});
+      }
+
   render() {
+    if (!this.state.fontLoaded){
+      return (
+        <View style={{ flex: 1, paddingTop: 20 }}>
+          <Image style={{width:170, height: 170, alignSelf: 'center'}} source={require('./images/skatingSkelli.gif')} />
+          <Text> Loading.... Ba dim ba dimb duu! </Text>
+        </View>
+      );
+      }
+
     return (
       <DrawerNavigation/>
     );
@@ -24,8 +57,7 @@ export default class App extends React.Component {
 
 const TabGame = TabNavigator({
     HighligthList: {screen: ScheduleDetail},
-    GameDetail: {screen: GameDetail},
-    GamePlayers: {screen: GamePlayers}
+    GameDetail: {screen: GameDetail}
 }, {
     tabBarPosition: 'bottom',
     animationEnabled: true,
@@ -38,7 +70,8 @@ const TabGame = TabNavigator({
 
 const TabTeam = TabNavigator({
   Players: {screen: StandingDetail},
-  Team: {screen: TeamDetail}
+  Team: {screen: TeamDetail},
+  Schedule: {screen: TeamSchedule}
 }, {
     tabBarPosition: 'bottom',
     animationEnabled: true,
@@ -114,8 +147,10 @@ const DrawerNavigation = DrawerNavigator({
              paddingTop: 70
            },
          labelStyle: {
-           fontSize: 30,
+           fontSize: 24,
            padding: 15,
-         }
+           fontFamily: 'montserrat-black',
+           fontWeight: 'normal'
+         },
        }
      })
