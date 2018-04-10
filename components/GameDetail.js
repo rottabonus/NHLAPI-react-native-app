@@ -11,7 +11,35 @@ export default class GameDetail extends React.Component {
     }
 
     componentWillMount(){
-      this.getGameDetail();
+      this.checkId();
+    }
+
+    checkId = () => {
+      const { gamePk } = this.props.navigation.state.params;
+      if(gamePk){
+        this.getGameDetail();
+      } else {
+        this.getGameDetailFav();
+      }
+    }
+
+    getGameDetailFav = () => {
+        const { games } = this.props.navigation.state.params;
+        const url='http://statsapi.web.nhl.com/api/v1/game/'+ games[0].gamePk +'/feed/live';
+        fetch(url)
+        .then(response => response.json())
+        .then(responseJson => {
+            this.setState({ home: responseJson.gameData.teams.home,
+                            away: responseJson.gameData.teams.away,
+                            periods: responseJson.liveData.linescore.periods,
+                            awayData: responseJson.liveData.boxscore.teams.away.teamStats.teamSkaterStats,
+                            homeData: responseJson.liveData.boxscore.teams.home.teamStats.teamSkaterStats,
+                            isLoading: false});
+       })
+
+                .catch((error) => {
+                  Alert.alert(error);
+                });
     }
 
     getGameDetail = () => {
@@ -61,9 +89,10 @@ _renderItem = data => {
     if (this.state.isLoading) {
      return (
        <View style={styles.container}>
+       <View style={{alignItems: 'center', marginTop: 100}}>
          <Image style={{width:170, height: 170, alignSelf: 'center'}} source={require('../images/skatingSkelli.gif')} />
-         <Text style={{fontFamily: 'montserrat-sb'}}> Loading....</Text>
-       </View>
+         <Text style={{fontFamily: 'montserrat-sb'}}> Cellying....</Text>
+       </View></View>
      );
      }
 

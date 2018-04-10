@@ -128,10 +128,11 @@ findPlayerFour = () => {
   render() {
       if (this.state.isLoading) {
       return (
-        <View style={{ flex: 1, paddingTop: 20 }}>
-          <ActivityIndicator />
-          <Text style={{fontFamily: 'montserrat-sb'}}> Loading....</Text>
-        </View>
+        <View style={styles.container}>
+        <View style={{alignItems: 'center', marginTop: 100}}>
+          <Image style={{width:170, height: 170, alignSelf: 'center'}} source={require('../images/skatingSkelli.gif')} />
+          <Text style={{fontFamily: 'montserrat-sb'}}> Bombing....</Text>
+        </View></View>
       );
     }
       if(this.state.playerFound) {

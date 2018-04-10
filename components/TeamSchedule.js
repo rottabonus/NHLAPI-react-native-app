@@ -55,6 +55,10 @@ export default class TeamSchedule extends React.Component {
 
     }
 
+    getFavTeamGame = (item) => {
+         this.props.navigation.navigate('ScheduleDetail', {...item});
+    }
+
 
     _renderItem = data => {
       const item = data.item;
@@ -65,17 +69,19 @@ export default class TeamSchedule extends React.Component {
             rightTitle={`${item.games[0].teams.home.score} - ${item.games[0].teams.away.score}`}
             titleStyle={{fontFamily: 'montserrat-regular', fontSize: 8}}
             title={`${item.games[0].teams.away.team.name} - ${item.games[0].teams.home.team.name}`}
-            rightTitleStyle={{fontFamily: 'montserrat-regular', fontSize: 8}}
+            rightTitleStyle={{fontFamily: 'montserrat-regular', fontSize: 8, color: 'black'}}
+            onPress={() => this.getFavTeamGame(item) }
             />
         )
       }
+
       return(
       <ListItem
         hideChevron={true}
         title={`${item.games[0].teams.away.team.name} - ${item.games[0].teams.home.team.name}`}
         titleStyle={{fontFamily: 'montserrat-regular', fontSize: 8}}
         rightTitle={"Upcoming"}
-        rightTitleStyle={{fontFamily: 'montserrat-regular', fontSize: 8}}
+        rightTitleStyle={{fontFamily: 'montserrat-regular', fontSize: 8, color: 'black', fontWeight: 'normal'}}
         />
       );
     }
@@ -85,9 +91,10 @@ export default class TeamSchedule extends React.Component {
     if (this.state.isLoading) {
     return (
       <View style={styles.container}>
+      <View style={{alignItems: 'center', marginTop: 100}}>
         <Image style={{width:170, height: 170, alignSelf: 'center'}} source={require('../images/skatingSkelli.gif')} />
-        <Text style={{fontFamily: 'montserrat-sb'}}> Loading....</Text>
-      </View>
+        <Text style={{fontFamily: 'montserrat-sb'}}> Clapping....</Text>
+      </View></View>
     );
     }
     return (
@@ -97,7 +104,7 @@ export default class TeamSchedule extends React.Component {
       <List>
       <FlatList
       data={this.state.schedule}
-      keyExtractor={item => item.date}
+      keyExtractor={item => item.games[0].gamePk}
       renderItem={this._renderItem}
       />
       </List>
@@ -121,17 +128,4 @@ const styles = StyleSheet.create({
     color: '#ff4000',
     padding: 5
   },
-  statBoxOne: {
-  backgroundColor: '#ffa366',
-  padding: 5,
-  marginLeft: 10,
-  marginRight: 10,
-},
-statBoxTwo: {
-backgroundColor: 'white',
-padding: 5,
-marginLeft: 10,
-marginRight: 10,
-},
-
 });

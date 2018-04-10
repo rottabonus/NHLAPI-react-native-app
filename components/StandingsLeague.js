@@ -51,7 +51,7 @@ export default class StandingsLeague extends React.Component {
         title={item.team.name}
         titleStyle={{fontFamily: 'montserrat-regular', fontSize: 11}}
         rightTitle={`${item.gamesPlayed} ${item.leagueRecord.wins} ${item.leagueRecord.losses} ${item.leagueRecord.ot} ${item.points} `}
-        rightTitleStyle={{fontFamily: 'montserrat-regular', fontSize: 12}}
+        rightTitleStyle={{fontFamily: 'montserrat-regular', fontSize: 12, color:'#ff4000'}}
         rightTitleContainerStyle={{alignItems: 'flex-end', flex: 1}}
         titleContainerStyle={{flex: 1, alignItems: 'flex-start'}}
         onPress={() => this.getTeam(item)}
@@ -65,9 +65,10 @@ export default class StandingsLeague extends React.Component {
       if (this.state.isLoading) {
       return (
         <View style={styles.container}>
+        <View style={{alignItems: 'center', marginTop: 100}}>
           <Image style={{width:170, height: 170, alignSelf: 'center'}} source={require('../images/skatingSkelli.gif')} />
-          <Text style={{fontFamily: 'montserrat-sb'}}> Loading....</Text>
-        </View>
+          <Text style={{fontFamily: 'montserrat-sb'}}> Hitting....</Text>
+        </View></View>
       );
       }
     return (

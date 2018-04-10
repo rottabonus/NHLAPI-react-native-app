@@ -42,10 +42,11 @@ async loadAssetAsync() {
   render() {
     if (!this.state.fontLoaded){
       return (
-        <View style={{ flex: 1, paddingTop: 20 }}>
-          <Image style={{width:170, height: 170, alignSelf: 'center'}} source={require('./images/skatingSkelli.gif')} />
-          <Text> Loading.... Ba dim ba dimb duu! </Text>
-        </View>
+        <View style={{ flex: 1, paddingTop: 20}}>
+        <View style={{alignItems: 'center', marginTop: 130}}>
+          <Image style={{width:170, height: 170}} source={require('./images/skatingSkelli.gif')} />
+          <Text> Skating... </Text>
+        </View></View>
       );
       }
 
@@ -112,12 +113,14 @@ const  TabFront = TabNavigator({
 
 const StackFront = StackNavigator({
         Front: {screen: TabFront},
-        Favourite: {screen: TabTeam}
+        Favourite: {screen: TabTeam},
+        ScheduleDetail: {screen: TabGame}
 })
 
 const  StackStanding = StackNavigator({
         Standings: {screen: TabStandings},
         StandingDetail: {screen: TabTeam},
+        ScheduleDetail: {screen: TabGame},
         Player: {screen: Player}
 
         })

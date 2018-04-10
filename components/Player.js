@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Alert, Image, FlatList, Picker } from 'react-native';
 import { Button } from 'react-native-elements';
-
+import { HokiText } from './StyledText';
 
 
 export default class Player extends React.Component {
@@ -63,9 +63,10 @@ export default class Player extends React.Component {
      if (this.state.isLoading) {
       return (
         <View style={styles.container}>
+        <View style={{alignItems: 'center', marginTop: 100}}>
           <Image style={{width:170, height: 170, alignSelf: 'center'}} source={require('../images/skatingSkelli.gif')} />
-          <Text style={{fontFamily: 'montserrat-sb'}}> Loading....</Text>
-        </View>
+          <Text style={{fontFamily: 'montserrat-sb'}}> Wheeling....</Text>
+        </View></View>
       );
       }
 
@@ -74,11 +75,11 @@ export default class Player extends React.Component {
          <View style={styles.container}>
          <View style={styles.cardTop}>
         <View style={styles.text}>
-        <Text>{person.fullName} </Text>
-        <Text>Birthdate: {person.birthDate}</Text>
-        <Text>Height: {person.height}</Text>
-        <Text>Nationality: {person.nationality}</Text>
-        <Text>Position: {person.primaryPosition.name}</Text>
+        <Text style={{fontFamily: 'montserrat-black', color: '#ff4000'}}>{person.fullName} </Text>
+        <HokiText>Birthdate: {person.birthDate}</HokiText>
+        <HokiText>Height: {person.height}</HokiText>
+        <HokiText>Nationality: {person.nationality}</HokiText>
+        <HokiText>Position: {person.primaryPosition.name}</HokiText>
         </View>
 
         <View style={styles.image}>
@@ -107,11 +108,11 @@ export default class Player extends React.Component {
         <View style={styles.container}>
          <View style={styles.cardTop}>
         <View style={styles.text}>
-        <Text>{person.fullName} </Text>
-        <Text>Birthdate: {person.birthDate}</Text>
-        <Text>Height: {person.height}</Text>
-        <Text>Nationality: {person.nationality}</Text>
-        <Text>Position: {person.primaryPosition.name}</Text>
+        <Text style={{fontFamily: 'montserrat-black', color: '#ff4000'}}>{person.fullName} </Text>
+        <HokiText>Birthdate: {person.birthDate}</HokiText>
+        <HokiText>Height: {person.height}</HokiText>
+        <HokiText>Nationality: {person.nationality}</HokiText>
+        <HokiText>Position: {person.primaryPosition.name}</HokiText>
         </View>
 
         <View style={styles.image}>
@@ -125,23 +126,23 @@ export default class Player extends React.Component {
         <View style={styles.cardBot}>
 
         <View style={styles.stats}>
-         <Text> Stats </Text>
-        <Text> Games: {this.state.season.games} </Text>
-        <Text> Save%: {this.state.season.evenStrengthSavePercentage} </Text>
-        <Text> GamesStarted: {this.state.season.gamesStarted} </Text>
-        <Text> GoalsAgainst%: {this.state.season.goalAgainstAverage} </Text>
-        <Text> GoalsAgainst: {this.state.season.goalsAgainst} </Text>
-        <Text> Wins: {this.state.season.wins} </Text>
-        <Text> Losses: {this.state.season.losses} </Text>
-        <Text> Ties: {this.state.season.ties} </Text>
-        <Text> OT: {this.state.season.ot} </Text>
-        <Text> Saves: {this.state.season.saves} </Text>
-        <Text> ShotsAgainst: {this.state.season.shotsAgainst} </Text>
-        <Text> Time on ice: {this.state.season.timeOnIce} </Text>
+         <Text style={{fontFamily: 'montserrat-black', color: '#ff4000'}}> Stats </Text>
+        <HokiText> Games: {this.state.season.games} </HokiText>
+        <HokiText> Save%: {this.state.season.savePercentage} </HokiText>
+        <HokiText> GamesStarted: {this.state.season.gamesStarted} </HokiText>
+        <HokiText> GoalsAgainst%: {this.state.season.goalAgainstAverage} </HokiText>
+        <HokiText> GoalsAgainst: {this.state.season.goalsAgainst} </HokiText>
+        <HokiText> Wins: {this.state.season.wins} </HokiText>
+        <HokiText> Losses: {this.state.season.losses} </HokiText>
+        <HokiText> Ties: {this.state.season.ties} </HokiText>
+        <HokiText> OT: {this.state.season.ot} </HokiText>
+        <HokiText> Saves: {this.state.season.saves} </HokiText>
+        <HokiText> ShotsAgainst: {this.state.season.shotsAgainst} </HokiText>
+        <HokiText> Time on ice: {this.state.season.timeOnIce} </HokiText>
         </View>
 
         <View style={styles.stats}>
-        <Text> Select season </Text>
+        <Text style={{fontFamily: 'montserrat-black', color: '#ff4000'}}> Select season </Text>
         <Picker
         style={{width: 140 }}
             selectedItem={this.state.season}
@@ -164,11 +165,11 @@ export default class Player extends React.Component {
       <View style={styles.container}>
          <View style={styles.cardTop}>
         <View style={styles.text}>
-        <Text>{person.fullName} </Text>
-        <Text>Birthdate: {person.birthDate}</Text>
-        <Text>Height: {person.height}</Text>
-        <Text>Nationality: {person.nationality}</Text>
-        <Text>Position: {person.primaryPosition.name}</Text>
+        <Text style={{fontFamily: 'montserrat-black', color: '#ff4000'}}>{person.fullName} </Text>
+        <HokiText>Birthdate: {person.birthDate}</HokiText>
+        <HokiText>Height: {person.height}</HokiText>
+        <HokiText>Nationality: {person.nationality}</HokiText>
+        <HokiText>Position: {person.primaryPosition.name}</HokiText>
         </View>
 
         <View style={styles.image}>
@@ -182,22 +183,22 @@ export default class Player extends React.Component {
         <View style={styles.cardBot}>
 
         <View style={styles.stats}>
-         <Text> Stats </Text>
-        <Text> Games: {this.state.season.games} </Text>
-        <Text> Points: {this.state.season.points} </Text>
-        <Text> Goals: {this.state.season.goals} </Text>
-        <Text> Assists: {this.state.season.assists} </Text>
-        <Text> PlusMinus: {this.state.season.plusMinus} </Text>
-        <Text> Blocked: {this.state.season.blocked} </Text>
-        <Text> Hits: {this.state.season.hits} </Text>
-        <Text> Pim: {this.state.season.pim} </Text>
-        <Text> Shots: {this.state.season.shots} </Text>
-        <Text> Shifts: {this.state.season.shifts} </Text>
-        <Text> Time on ice: {this.state.season.timeOnIce} </Text>
+         <Text style={{fontFamily: 'montserrat-black', color: '#ff4000'}}> Stats </Text>
+        <HokiText> Games: {this.state.season.games} </HokiText>
+        <HokiText> Points: {this.state.season.points} </HokiText>
+        <HokiText> Goals: {this.state.season.goals} </HokiText>
+        <HokiText> Assists: {this.state.season.assists} </HokiText>
+        <HokiText> PlusMinus: {this.state.season.plusMinus} </HokiText>
+        <HokiText> Blocked: {this.state.season.blocked} </HokiText>
+        <HokiText> Hits: {this.state.season.hits} </HokiText>
+        <HokiText> Pim: {this.state.season.pim} </HokiText>
+        <HokiText> Shots: {this.state.season.shots} </HokiText>
+        <HokiText> Shifts: {this.state.season.shifts} </HokiText>
+        <HokiText> Time on ice: {this.state.season.timeOnIce} </HokiText>
         </View>
 
         <View style={styles.stats}>
-        <Text> Select season </Text>
+        <Text style={{fontFamily: 'montserrat-black', color: '#ff4000'}}> Select season </Text>
         <Picker
         style={{width: 140 }}
             selectedValue={this.state.season}

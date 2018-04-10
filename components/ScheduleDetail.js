@@ -13,9 +13,30 @@ export default class ScheduleDetail extends React.Component {
 
 
     componentDidMount(){
-        this.getHighlights();
+        this.checkId();
     }
 
+    checkId = () => {
+      const { gamePk } = this.props.navigation.state.params;
+      if(gamePk){
+        this.getHighlights();
+      } else {
+        this.getHighLightsFav();
+      }
+    }
+
+
+    getHighLightsFav = () => {
+      const { games } = this.props.navigation.state.params;
+      const url='http://statsapi.web.nhl.com/api/v1/game/'+ games[0].gamePk +'/content';
+      fetch(url)
+      .then(response => response.json())
+      .then(responseJson => {
+          this.setState({ highlights: responseJson.highlights.gameCenter.items,
+                          isLoading: false
+          });
+      })
+  }
 
 
    getHighlights = () => {
@@ -39,9 +60,10 @@ export default class ScheduleDetail extends React.Component {
       if (this.state.isLoading) {
       return (
         <View style={styles.container}>
+        <View style={{alignItems: 'center', marginTop: 100}}>
           <Image style={{width:170, height: 170, alignSelf: 'center'}} source={require('../images/skatingSkelli.gif')} />
-          <Text style={{fontFamily: 'montserrat-sb'}}> Loading....</Text>
-        </View>
+          <Text style={{fontFamily: 'montserrat-sb'}}> Sniping....</Text>
+        </View></View>
       );
       }
     return (

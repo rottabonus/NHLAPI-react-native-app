@@ -86,9 +86,10 @@ export default class StandingDetail extends React.Component {
       if (this.state.isLoading) {
       return (
         <View style={styles.container}>
+        <View style={{alignItems: 'center', marginTop: 100}}>
           <Image style={{width:170, height: 170, alignSelf: 'center'}} source={require('../images/skatingSkelli.gif')} />
-          <Text style={{fontFamily: 'montserrat-sb'}}> Loading....</Text>
-        </View>
+          <Text style={{fontFamily: 'montserrat-sb'}}> Clapping....</Text>
+        </View></View>
       );
       }
     return (
