@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, Alert, FlatList, Image } from 'react-native';
 import { Header, Button } from 'react-native-elements';
+import { HokiText } from './StyledText'
 
 export default class GameDetail extends React.Component {
     static navigationOptions = {title: 'Game Details'};
@@ -67,15 +68,15 @@ _renderItem = data => {
   return(
     <View style={styles.cardBot}>
       <View>
-    <Text>Goals: {item.home.goals}</Text>
-    <Text>Shots on goal: {item.home.shotsOnGoal}</Text>
+    <HokiText>Goals: {item.home.goals}</HokiText>
+    <HokiText>Shots on goal: {item.home.shotsOnGoal}</HokiText>
       </View>
       <View>
-      <Text>{item.ordinalNum}</Text>
+      <HokiText style={{color: '#ff4000'}}>{item.ordinalNum}</HokiText>
       </View>
       <View>
-    <Text>Goals: {item.away.goals}</Text>
-    <Text>Shots on goal: {item.away.shotsOnGoal}</Text>
+    <HokiText>Goals: {item.away.goals}</HokiText>
+    <HokiText>Shots on goal: {item.away.shotsOnGoal}</HokiText>
       </View>
     </View>
   )
@@ -90,7 +91,7 @@ _renderItem = data => {
      return (
        <View style={styles.container}>
        <View style={{alignItems: 'center', marginTop: 100}}>
-         <Image style={{width:170, height: 170, alignSelf: 'center'}} source={require('../images/skatingSkelli.gif')} />
+         <Image style={{width:170, height: 170, alignSelf: 'center'}} source={require('../assets/images/skatingSkelli.gif')} />
          <Text style={{fontFamily: 'montserrat-sb'}}> Cellying....</Text>
        </View></View>
      );
@@ -112,20 +113,20 @@ _renderItem = data => {
 
        <View style={styles.cardGame}>
                <View>
-               <Text>Shots: {this.state.homeData.shots}</Text>
-               <Text>Powerplay goals: {this.state.homeData.powerPlayGoals}</Text>
-               <Text>PenaltyMinutes: {this.state.homeData.pim}</Text>
-               <Text>Blocked: {this.state.homeData.blocked}</Text>
-               <Text>Giveaways: {this.state.homeData.giveaways}</Text>
-               <Text>Hits: {this.state.homeData.hits}</Text>
+               <HokiText>Shots: {this.state.homeData.shots}</HokiText>
+               <HokiText>Powerplay goals: {this.state.homeData.powerPlayGoals}</HokiText>
+               <HokiText>PenaltyMinutes: {this.state.homeData.pim}</HokiText>
+               <HokiText>Blocked: {this.state.homeData.blocked}</HokiText>
+               <HokiText>Giveaways: {this.state.homeData.giveaways}</HokiText>
+               <HokiText>Hits: {this.state.homeData.hits}</HokiText>
                </View>
                <View>
-               <Text>Shots: {this.state.awayData.shots}</Text>
-               <Text>Powerplay goals: {this.state.awayData.powerPlayGoals}</Text>
-               <Text>PenaltyMinutes: {this.state.awayData.pim}</Text>
-               <Text>Blocked: {this.state.awayData.blocked}</Text>
-               <Text>Giveaways: {this.state.awayData.giveaways}</Text>
-               <Text>Hits: {this.state.awayData.hits}</Text>
+               <HokiText>Shots: {this.state.awayData.shots}</HokiText>
+               <HokiText>Powerplay goals: {this.state.awayData.powerPlayGoals}</HokiText>
+               <HokiText>PenaltyMinutes: {this.state.awayData.pim}</HokiText>
+               <HokiText>Blocked: {this.state.awayData.blocked}</HokiText>
+               <HokiText>Giveaways: {this.state.awayData.giveaways}</HokiText>
+               <HokiText>Hits: {this.state.awayData.hits}</HokiText>
                </View></View>
 
         <View>

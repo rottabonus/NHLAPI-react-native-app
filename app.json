@@ -1,16 +1,16 @@
 
 {
    "expo": {
-    "name": "NHLAPPTest",
-    "icon": "./images/logoSquare.png",
+    "name": "NHLskeleton",
+    "icon": "./assets/images/logoSquare.png",
     "version": "1.0.0",
-    "slug": "NHLtest",
+    "slug": "nhlAPIapp",
     "sdkVersion": "25.0.0",
     "ios": {
-      "bundleIdentifier": "com.rottabonus.NHLAPPTest"
+      "bundleIdentifier": "com.rottabonus.NHLskeleton"
     },
     "android": {
-      "package": "com.rottabonus.NHLAPPTest"
+      "package": "com.rottabonus.NHLskeleton"
     }
    }
  }

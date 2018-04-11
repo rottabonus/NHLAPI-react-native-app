@@ -51,7 +51,7 @@ showHelp = () => {
         this.state.help ? <Text style={styles.featureText}> Search: Search a player by name{'\n'} Standings: Show league and division standings{'\n'}
         Games: Show scheduled games for today, yesterday or by date{'\n'} Teams: show roster, schedule and stats from season{'\n'}
         Lists: Navigate by pushing listitems!{'\n'} Games: Show highlights and stats of games</Text> : <Image style={{width:170, height: 170, alignSelf: 'center'}}
-        source={require('../images/logoSquare.png')} />
+        source={require('../assets/images/logoSquare.png')} />
         }
 
 

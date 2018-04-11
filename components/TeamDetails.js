@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Alert, FlatList, Image } from 'react-native';
+import { HokiText } from './StyledText';
 
 export default class TeamDetail extends React.Component {
     static navigationOptions = {title: 'Team'};
@@ -52,13 +53,15 @@ export default class TeamDetail extends React.Component {
                 });
     }
 
+
+
   render() {
     const { id } = this.props.navigation.state.params;
     if (this.state.isLoading) {
     return (
       <View style={styles.container}>
       <View style={{alignItems: 'center', marginTop: 100}}>
-        <Image style={{width:170, height: 170, alignSelf: 'center'}} source={require('../images/skatingSkelli.gif')} />
+        <Image style={{width:170, height: 170, alignSelf: 'center'}} source={require('../assets/images/skatingSkelli.gif')} />
         <Text style={{fontFamily: 'montserrat-sb'}}> Interfering....</Text>
       </View></View>
     );
@@ -68,40 +71,40 @@ export default class TeamDetail extends React.Component {
       <View style={styles.container}>
          <Text style={styles.teamText}>  {this.state.details.team.name} </Text>
          <View style={styles.statBoxOne}>
-         <Text>Games Played: {this.state.details.stat.gamesPlayed}</Text>
+         <HokiText>Games Played: {this.state.details.stat.gamesPlayed}</HokiText>
          </View>
          <View style={styles.statBoxTwo}>
-         <Text>Wins: {this.state.details.stat.wins}</Text>
+         <HokiText>Wins: {this.state.details.stat.wins}</HokiText>
          </View>
          <View style={styles.statBoxOne}>
-         <Text>Losses: {this.state.details.stat.losses}</Text>
+         <HokiText>Losses: {this.state.details.stat.losses}</HokiText>
          </View>
          <View style={styles.statBoxTwo}>
-         <Text>OverTime: {this.state.details.stat.ot}</Text>
+         <HokiText>OverTime: {this.state.details.stat.ot}</HokiText>
          </View>
          <View style={styles.statBoxOne}>
-         <Text>Points: {this.state.details.stat.pts}</Text>
+         <HokiText>Points: {this.state.details.stat.pts}</HokiText>
          </View>
          <View style={styles.statBoxTwo}>
-         <Text>Goals Per Game: {this.state.details.stat.goalsPerGame}</Text>
+         <HokiText>Goals Per Game: {this.state.details.stat.goalsPerGame}</HokiText>
          </View>
          <View style={styles.statBoxOne}>
-         <Text>Goals Against Per Game: {this.state.details.stat.goalsAgainstPerGame}</Text>
+         <HokiText>Goals Against Per Game: {this.state.details.stat.goalsAgainstPerGame}</HokiText>
          </View>
          <View style={styles.statBoxTwo}>
-         <Text>Penalty Killing Percentage: {this.state.details.stat.penaltyKillPercentage}%</Text>
+         <HokiText>Penalty Killing Percentage: {this.state.details.stat.penaltyKillPercentage}%</HokiText>
          </View>
          <View style={styles.statBoxOne}>
-         <Text>Powerplay Percentage: {this.state.details.stat.powerPlayPercentage}%</Text>
+         <HokiText>Powerplay Percentage: {this.state.details.stat.powerPlayPercentage}%</HokiText>
          </View>
          <View style={styles.statBoxTwo}>
-         <Text>Shots Per Game: {this.state.details.stat.shotsPerGame}</Text>
+         <HokiText>Shots Per Game: {this.state.details.stat.shotsPerGame}</HokiText>
          </View>
          <View style={styles.statBoxOne}>
-         <Text>Shots Against Per Game: {this.state.details.stat.shotsAllowed}</Text>
+         <HokiText>Shots Against Per Game: {this.state.details.stat.shotsAllowed}</HokiText>
          </View>
          <View style={styles.statBoxTwo}>
-         <Text>Faceoff Win Percentage: {this.state.details.stat.faceOffWinPercentage}%</Text>
+         <HokiText>Faceoff Win Percentage: {this.state.details.stat.faceOffWinPercentage}%</HokiText>
          </View>
       </View>
     );

@@ -82,6 +82,7 @@ export default class TeamSchedule extends React.Component {
         titleStyle={{fontFamily: 'montserrat-regular', fontSize: 8}}
         rightTitle={"Upcoming"}
         rightTitleStyle={{fontFamily: 'montserrat-regular', fontSize: 8, color: 'black', fontWeight: 'normal'}}
+        onPress={() => this.getFavTeamGame(item) }
         />
       );
     }
@@ -92,7 +93,7 @@ export default class TeamSchedule extends React.Component {
     return (
       <View style={styles.container}>
       <View style={{alignItems: 'center', marginTop: 100}}>
-        <Image style={{width:170, height: 170, alignSelf: 'center'}} source={require('../images/skatingSkelli.gif')} />
+        <Image style={{width:170, height: 170, alignSelf: 'center'}} source={require('../assets/images/skatingSkelli.gif')} />
         <Text style={{fontFamily: 'montserrat-sb'}}> Clapping....</Text>
       </View></View>
     );

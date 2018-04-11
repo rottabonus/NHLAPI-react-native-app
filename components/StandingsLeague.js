@@ -45,13 +45,29 @@ export default class StandingsLeague extends React.Component {
 
   _renderItem = data => {
     const item = data.item;
+    if(item.clinchIndicator === "x" || item.clinchIndicator === "p" || item.clinchIndicator === "z" || item.clinchIndicator === "y"){
+      return(
+        <ListItem
+          hideChevron={true}
+          title={item.team.name}
+          titleStyle={{fontFamily: 'montserrat-regular', fontSize: 11}}
+          rightTitle={`${item.gamesPlayed} ${item.leagueRecord.wins} ${item.leagueRecord.losses} ${item.leagueRecord.ot} ${item.points} `}
+          rightTitleStyle={{fontFamily: 'montserrat-regular', fontSize: 12, color:'#ff4000'}}
+          rightTitleContainerStyle={{alignItems: 'flex-end', flex: 1}}
+          titleContainerStyle={{flex: 1, alignItems: 'flex-start'}}
+          onPress={() => this.getTeam(item)}
+          onLongPress={() => this.saveTeam(item.team.name, item.team.id)}
+          />
+
+      )
+    }
     return(
       <ListItem
         hideChevron={true}
         title={item.team.name}
-        titleStyle={{fontFamily: 'montserrat-regular', fontSize: 11}}
+        titleStyle={{fontFamily: 'montserrat-regular', fontSize: 11, color: 'gray'}}
         rightTitle={`${item.gamesPlayed} ${item.leagueRecord.wins} ${item.leagueRecord.losses} ${item.leagueRecord.ot} ${item.points} `}
-        rightTitleStyle={{fontFamily: 'montserrat-regular', fontSize: 12, color:'#ff4000'}}
+        rightTitleStyle={{fontFamily: 'montserrat-regular', fontSize: 12, color:'gray'}}
         rightTitleContainerStyle={{alignItems: 'flex-end', flex: 1}}
         titleContainerStyle={{flex: 1, alignItems: 'flex-start'}}
         onPress={() => this.getTeam(item)}
@@ -66,7 +82,7 @@ export default class StandingsLeague extends React.Component {
       return (
         <View style={styles.container}>
         <View style={{alignItems: 'center', marginTop: 100}}>
-          <Image style={{width:170, height: 170, alignSelf: 'center'}} source={require('../images/skatingSkelli.gif')} />
+          <Image style={{width:170, height: 170, alignSelf: 'center'}} source={require('../assets/images/skatingSkelli.gif')} />
           <Text style={{fontFamily: 'montserrat-sb'}}> Hitting....</Text>
         </View></View>
       );

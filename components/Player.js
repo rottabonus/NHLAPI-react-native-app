@@ -64,7 +64,7 @@ export default class Player extends React.Component {
       return (
         <View style={styles.container}>
         <View style={{alignItems: 'center', marginTop: 100}}>
-          <Image style={{width:170, height: 170, alignSelf: 'center'}} source={require('../images/skatingSkelli.gif')} />
+          <Image style={{width:170, height: 170, alignSelf: 'center'}} source={require('../assets/images/skatingSkelli.gif')} />
           <Text style={{fontFamily: 'montserrat-sb'}}> Wheeling....</Text>
         </View></View>
       );
@@ -93,7 +93,7 @@ export default class Player extends React.Component {
         <View style={styles.cardTop}>
         <View>
         <Image style={{width:200, height: 150, marginLeft: '10%'}}
-        source={require('../images/leanSkelli.png')} />
+        source={require('../assets/images/leanSkelli.png')} />
         </View>
         <View>
         <Text> No games on NHL </Text>

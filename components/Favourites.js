@@ -43,7 +43,7 @@ deleteTeam = (id) => {
       return(
         <View style={styles.containerNoFav}>
         <Image style={{width:250, height: 300, alignSelf: 'center'}}
-        source={require('../images/leanSkelli.png')} />
+        source={require('../assets/images/leanSkelli.png')} />
         <Text style={{textAlign: 'center', fontSize: 22, padding: 8, fontFamily: 'montserrat-black'}}> No Favourite teams yet. </Text>
         <HokiText style={{textAlign: 'center'}}>Long press a team on a LIST to add to favourites!</HokiText>
         </View>

@@ -14,7 +14,7 @@ import TeamDetail from './components/TeamDetails';
 import StandingsLeague from './components/StandingsLeague';
 import Favourites from './components/Favourites';
 import TeamSchedule from './components/TeamSchedule';
-import { Font } from 'expo';
+import { Font, Asset } from 'expo';
 
 export default class App extends React.Component {
   constructor(props){
@@ -25,7 +25,22 @@ export default class App extends React.Component {
   }
 
 componentDidMount() {
+  this.loadImageAsync();
   this.loadAssetAsync();
+
+}
+
+async loadImageAsync() {
+  const images = [
+    require('./assets/images/skatingSkelli.gif'),
+    require('./assets/images/leanSkelli.png'),
+    require('./assets/images/logoSquare.png'),
+  ] ;
+
+  const cacheImages = images.map((image)=> {
+    return Asset.fromModule(image).downloadAsync();
+  });
+  return Promise.all(cacheImages)
 }
 
 async loadAssetAsync() {
@@ -39,12 +54,13 @@ async loadAssetAsync() {
         this.setState({ fontLoaded: true});
       }
 
+
   render() {
     if (!this.state.fontLoaded){
       return (
         <View style={{ flex: 1, paddingTop: 20}}>
         <View style={{alignItems: 'center', marginTop: 130}}>
-          <Image style={{width:170, height: 170}} source={require('./images/skatingSkelli.gif')} />
+          <Image style={{width:170, height: 170}} source={require('./assets/images/skatingSkelli.gif')} />
           <Text> Skating... </Text>
         </View></View>
       );

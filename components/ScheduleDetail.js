@@ -61,7 +61,7 @@ export default class ScheduleDetail extends React.Component {
       return (
         <View style={styles.container}>
         <View style={{alignItems: 'center', marginTop: 100}}>
-          <Image style={{width:170, height: 170, alignSelf: 'center'}} source={require('../images/skatingSkelli.gif')} />
+          <Image style={{width:170, height: 170, alignSelf: 'center'}} source={require('../assets/images/skatingSkelli.gif')} />
           <Text style={{fontFamily: 'montserrat-sb'}}> Sniping....</Text>
         </View></View>
       );
@@ -103,7 +103,6 @@ const styles = StyleSheet.create({
       textAlign: 'center',
       fontSize: 20,
       color: '#ff4000',
-      paddingTop: 10
 
     }
 });
