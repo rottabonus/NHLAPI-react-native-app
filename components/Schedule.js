@@ -35,7 +35,7 @@ getParsedDate = () => {
         fetch(url)
         .then(response => response.json())
         .then(responseJson => {
-          if(responseJson.length === 1){
+          if(responseJson.dates.length === 1){
             this.setState({ schedule: responseJson.dates[0].games,
                           renderdate: responseJson.dates[0].date,
                           games: true});
@@ -69,7 +69,7 @@ getParsedDate = () => {
         fetch(url)
         .then(response => response.json())
         .then(responseJson => {
-          if(responseJson.length === 1){
+          if(responseJson.dates.length > 0){
             this.setState({ schedule: responseJson.dates[0].games,
                           renderdate: this.state.yesterday,
                           games: true});
