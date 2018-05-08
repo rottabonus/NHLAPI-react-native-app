@@ -22,11 +22,15 @@ export default class Schedule extends React.Component {
 
 getParsedDate = () => {
     let date = new Date();
+    let thisDate = new Date();
     date.setDate(date.getDate() - 1);
     let dateIso = date.toISOString();
+    let thisDateIso = thisDate.toISOString();
     let formattedDate = dateIso.substring(0, 10);
+    let formattedThisDate = thisDateIso.substring(0, 10);
     this.setState({
-        yesterday: formattedDate
+        yesterday: formattedDate,
+        renderdate: formattedThisDate
     });
 }
 
@@ -37,7 +41,6 @@ getParsedDate = () => {
         .then(responseJson => {
           if(responseJson.dates.length === 1){
             this.setState({ schedule: responseJson.dates[0].games,
-                          renderdate: responseJson.dates[0].date,
                           games: true});
        } else {
          this.setState({games: false})
@@ -65,13 +68,16 @@ getParsedDate = () => {
     }
 
     getYesterday = () => {
-        const url='https://statsapi.web.nhl.com/api/v1/schedule?startDate='+ this.state.yesterday+'&endDate='+this.state.renderdate;
+
+      const thisDate = this.state.renderdate;
+      const yesterday = this.state.yesterday;
+        const url='https://statsapi.web.nhl.com/api/v1/schedule?startDate='+yesterday+'&endDate='+thisDate;
         fetch(url)
         .then(response => response.json())
         .then(responseJson => {
-          if(responseJson.dates.length > 0){
+          if(responseJson.dates[0].date == yesterday){
             this.setState({ schedule: responseJson.dates[0].games,
-                          renderdate: this.state.yesterday,
+                          renderdate: responseJson.dates[0].date,
                           games: true});
        } else {
          this.setState({games: false})
