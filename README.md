@@ -8,6 +8,8 @@ This application uses the ['Undocumented NHL API'](http://statsapi.web.nhl.com/a
 
 Application is under construction!
 
+![showcase](https://github.com/rottabonus/NHLAPI-react-native-app/blob/master/showcase.gif)
+
 **Implemented features**:
 
 1. Search games by date
@@ -30,6 +32,7 @@ Application is under construction!
 
 **Todo:**
 
+1. As I started my react journey with this application, I have A LOT of refactoring to do....
 1. Find players by nationality
 1. Login
 1. Polished UI
