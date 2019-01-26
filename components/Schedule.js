@@ -1,14 +1,16 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList, TextInput, Alert, ActivityIndicator} from 'react-native';
-import { List, ListItem, Header, Button } from "react-native-elements";
+import { StyleSheet, Text, View, TextInput, Alert } from 'react-native';
+import { Button } from "react-native-elements";
 import { getSchedule } from '../services/schedule'
 import { MyHeader } from './Header'
+import { ScheduleList } from './ScheduleList'
+import { HokiDatePicker } from './DatePicker'
 
 export default class Schedule extends React.Component {
     static navigationOptions = {header: null}
     constructor(props){
         super(props)
-        this.state = { schedule: [], renderdate: '', newdate: '', yesterday: '', games: true, isLoading: true }
+        this.state = { schedule: [], renderDate: '', newDate: '2018-09-16', yesterday: '', games: true, isLoading: true }
     }
 
     componentWillMount(){
@@ -29,27 +31,27 @@ getParsedDate = () => {
     let yday = new Date()
     yday.setDate(date.getDate() - 1)
     const yesterday = yday.toISOString().substring(0,10)
-    const renderdate = date.toISOString().substring(0, 10)
-    this.setState({ yesterday, renderdate })
+    const renderDate = date.toISOString().substring(0, 10)
+    this.setState({ yesterday, renderDate })
 }
 
     getScheduleDate  = async () => {
         const schedule = await getSchedule('https://statsapi.web.nhl.com/api/v1/schedule?season=20182019')
-        let date = this.state.newdate
+        let date = this.state.newDate
            const correctDate = schedule.dates.filter(d => d.date === date)
-          if (correctDate.length === 1){
-            this.setState({ schedule: correctDate[0].games, renderdate: correctDate[0].date })
+          if (correctDate[0].date === date){
+            this.setState({ schedule: correctDate[0].games, renderDate: correctDate[0].date, games: true })
           }
     }
 
     getYesterday = async () => {
-      const thisDate = this.state.renderdate
+      const thisDate = this.state.renderDate
       const yesterday = this.state.yesterday
         const url = `https://statsapi.web.nhl.com/api/v1/schedule?startDate=${yesterday}&endDate=${thisDate}`;
           const yesterdaySchedule = await getSchedule(url)
             if(yesterdaySchedule.dates[0].date === yesterday){
               this.setState({ schedule: yesterdaySchedule.dates[0].games,
-                              renderdate: yesterdaySchedule.dates[0].date,
+                              renderDate: yesterdaySchedule.dates[0].date,
                               games: true })
             } else {
               this.setState({ games: false })
@@ -60,43 +62,30 @@ getParsedDate = () => {
         this.props.navigation.navigate('ScheduleDetail', {...item});
     }
 
+    changeDate = (item) => {
+        this.setState({newDate: item})
+    }
+
   render() {
     return (
         <View style={styles.header}>
           <MyHeader  name="Games" navigation={this.props.navigation}/>
-
           <View style={styles.container}>
-        <TextInput style={styles.input} placeholder='Date YYYY-MM-DD' onChangeText={(newdate) => this.setState({newdate})} value={this.state.newdate} />
+              <TextInput style={styles.input} placeholder='Date YYYY-MM-DD' onChangeText={(newDate) => this.setState({newDate})} value={this.state.newDate} />
         <View style={styles.buttons}><View>
         <Button buttonStyle={{backgroundColor: '#ff751a'}} onPress={this.getScheduleDate} title="Search by Date"/>
         </View><View>
         <Button buttonStyle={{backgroundColor: '#ff751a'}} onPress={this.getYesterday} title="Yesterdays games"/>
         </View></View>
         <View>
-        <Text style={styles.text}>Schedule for {this.state.renderdate}</Text>
+        <Text style={styles.text}>Schedule for {this.state.renderDate}</Text>
         </View>
-
-        {
-        this.state.games ?
-        <List>
-        <FlatList
-        data={this.state.schedule}
-        keyExtractor={item => item.gamePk}
-        renderItem={({item}) => <ListItem
-        title={`${item.teams.home.team.name} - ${item.teams.away.team.name}`}
-        titleStyle={{fontFamily: 'montserrat-regular', fontSize: 12}}
-        subtitle={`${item.venue.name} ${item.teams.home.score} - ${item.teams.away.score}`}
-        subtitleStyle={{fontFamily: 'montserrat-regular', fontSize: 12}}
-        onPress={() => this.getMatch(item)}
-        />}/>
-        </List> : <Text style={styles.textGame}> No games on selected date! </Text>
-      }
+        <ScheduleList get={this.getMatch} schedule={this.state.schedule} games={this.state.games} />
         </View>
         </View>
     )
   }
 }
-
 
 
 const styles = StyleSheet.create({
@@ -130,13 +119,5 @@ input: {
 
 buttons: {
   flexDirection: 'row'
-},
-
-textGame: {
-  fontFamily: 'montserrat-sb',
-  textAlign: 'center',
-  fontSize: 20,
-  paddingTop: 5
 }
-
 });
